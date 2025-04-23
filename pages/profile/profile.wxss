@@ -1,0 +1,114 @@
+.container {
+  padding: 20rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.info-box {
+  flex: 1;
+}
+
+.nickname {
+  font-size: 36rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.badge {
+  background: #ffd700;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+
+.order-section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.order-list {
+  height: calc(100vh - 400rpx);
+}
+
+/* 新增按钮样式 */
+
+.order-btn:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* 优化现有订单样式 */
+.order-item {
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  background: white;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.order-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.order-status {
+  font-size: 26rpx;
+  color: #007bff;
+}
+
+.order-time {
+  font-size: 24rpx;
+  color: #999;
+}
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.status {
+  color: #09bb07;
+}
+
+.status.cancelled {
+  color: #888;
+}
+
+.order-date {
+  color: #666;
+  font-size: 24rpx;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15rpx;
+}
+
+.total {
+  color: #e64340;
+  font-weight: bold;
+}

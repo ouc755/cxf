@@ -1,0 +1,21 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <view class="toys-list">
+    <view class="toy-item" wx:for="{{toysList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <image src="{{item.image}}" mode="aspectFit" class="toy-img"/>
+      <view class="toy-info">
+        <text class="toy-name">{{item.name}}</text>
+        <text class="toy-price">¥{{item.price}}</text>
+        <text class="toy-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部导航栏 -->
+  <view class="bottom-nav">
+    <view class="nav-btn" wx:for="{{[]}}" wx:key="index" data-index="{{index}}" bindtap="switchTab">
+      <image src="../../images/{{item}}.png" class="nav-icon"/>
+      <text>{{item}}</text>
+    </view>
+  </view>
+</view>

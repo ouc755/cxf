@@ -1,0 +1,29 @@
+<view class="container">
+  <!-- 用户信息模块 -->
+  <view class="user-info">
+    <image class="avatar" src="{{userInfo.avatar}}"></image>
+    <view class="info-box">
+      <text class="nickname">{{userInfo.nickname}}</text>
+      <text class="badge">{{userInfo.memberLevel}}</text>
+    </view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="order-section">
+    <view class="section-title">历史订单</view>
+    <!-- 原有订单列表 -->
+    <view class="order-list">
+      <block wx:for="{{orders}}" wx:key="index">
+        <view class="order-item" bindtap="viewOrderDetail" data-id="{{item.id}}">
+          <view class="order-info">
+            <text class="order-title">{{item.title}}</text>
+            <text class="order-status">{{item.status}}</text>
+          </view>
+          <text class="order-time">{{item.time}}</text>
+        </view>
+      </block>
+    </view>
+    
+
+  </view>
+</view>

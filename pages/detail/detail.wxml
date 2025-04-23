@@ -1,0 +1,24 @@
+<view class="container" wx:if="{{toy}}">
+  <image src="{{toy.image}}" mode="aspectFit" class="toy-img"/>
+  <view class="toy-info">
+    <text class="toy-name">{{toy.name}}</text>
+    <text class="toy-price">¥{{toy.price}}</text>
+    <view class="size-select">
+      <text class="toy-size">尺寸：{{toy.size}}</text>
+      <view class="size-buttons">
+        <button 
+          class="size-btn {{selectedSize === '大' ? 'active' : ''}}"
+          bindtap="selectSize" 
+          data-size="大"
+        >大号</button>
+        <button 
+          class="size-btn {{selectedSize === '小' ? 'active' : ''}}"
+          bindtap="selectSize"
+          data-size="小"
+        >小号</button>
+      </view>
+    </view>
+    <text class="toy-desc">{{toy.desc}}</text>
+  </view>
+  <button class="buy-btn">立即购买</button>
+</view>
