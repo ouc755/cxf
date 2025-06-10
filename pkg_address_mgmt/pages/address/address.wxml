@@ -1,0 +1,3 @@
+<view class="container">
+  <button class="add-btn" bindtap="addAddress">+ 新增地址</button>
+</view>

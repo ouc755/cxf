@@ -1,29 +1,56 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/detail/detail",
+    "pages/category/category",
+    "pages/product/product",
+    "pages/cart/cart",
     "pages/profile/profile",
-    "pages/orderDetail/orderDetail"
+    "pages/settings/settings",
+    "pages/adminLogin/adminLogin",
+    "pages/login/login"
   ],
   "window": {
-    "navigationBarTitleText": "磁悬浮玩具商城",
-    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "玩具商城",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#ff4444",
+    "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页"
       },
       {
-        "pagePath": "pages/orderDetail/orderDetail",
-        "text": "订单"
+        "pagePath": "pages/cart/cart",
+        "text": "购物车"
       },
       {
         "pagePath": "pages/profile/profile",
         "text": "我的"
       }
     ]
-  }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "cloud": true,
+  "lazyCodeLoading": "requiredComponents",
+  "useExtendedLib": {
+    "weui": true
+  },
+  "subpackages": [{
+    "root": "pages/admin",
+    "pages": [
+      "admin",
+      "carts/carts",
+      "addAdmin/addAdmin",
+      "addProduct/addProduct",
+      "order/detail"
+    ],
+    "independent": true
+  }]
 }

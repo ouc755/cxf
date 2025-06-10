@@ -1,29 +1,84 @@
-<view class="container">
-  <!-- 用户信息模块 -->
-  <view class="user-info">
-    <image class="avatar" src="{{userInfo.avatar}}"></image>
-    <view class="info-box">
-      <text class="nickname">{{userInfo.nickname}}</text>
-      <text class="badge">{{userInfo.memberLevel}}</text>
+<view class="profile-container">
+  <!-- 用户信息区域 -->
+  <view class="user-info-section">
+    <block wx:if="{{isLoggedIn}}">
+      <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+      <view class="user-details">
+        <text class="nickname clickable" bindtap="handleEditNickname">{{userInfo.nickName}}</text>
+      </view>
+    </block>
+    <block wx:else>
+      <image class="avatar" src="{{defaultAvatarUrl}}" mode="aspectFill"></image>
+      <view class="user-details">
+        <text class="login-tip" bindtap="navigateToLogin">点击登录</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- 订单状态区域 -->
+  <view class="orders-section">
+    <view class="section-header">
+      <text class="section-title">我的订单</text>
+      <view class="view-all" bindtap="navigateToOrders" data-type="all">
+        <text>查看全部</text>
+        <text class="arrow">></text>
+      </view>
+    </view>
+    <view class="order-types">
+      <view class="order-type" bindtap="navigateToOrders" data-type="unpaid">
+        <view class="badge" wx:if="{{orderCounts.unpaid > 0}}">{{orderCounts.unpaid}}</view>
+        <image src="cloud://your-env.xxxx/unpaid.png"></image>
+        <text>待付款</text>
+      </view>
+      <view class="order-type" bindtap="navigateToOrders" data-type="undelivered">
+        <view class="badge" wx:if="{{orderCounts.undelivered > 0}}">{{orderCounts.undelivered}}</view>
+        <image src="cloud://your-env.xxxx/undelivered.png"></image>
+        <text>待发货</text>
+      </view>
+      <view class="order-type" bindtap="navigateToOrders" data-type="delivered">
+        <view class="badge" wx:if="{{orderCounts.delivered > 0}}">{{orderCounts.delivered}}</view>
+        <image src="cloud://your-env.xxxx/delivered.png"></image>
+        <text>待收货</text>
+      </view>
+      <view class="order-type" bindtap="navigateToOrders" data-type="completed">
+        <view class="badge" wx:if="{{orderCounts.completed > 0}}">{{orderCounts.completed}}</view>
+        <image src="cloud://your-env.xxxx/completed.png"></image>
+        <text>已完成</text>
+      </view>
     </view>
   </view>
 
-  <!-- 订单列表 -->
-  <view class="order-section">
-    <view class="section-title">历史订单</view>
-    <!-- 原有订单列表 -->
-    <view class="order-list">
-      <block wx:for="{{orders}}" wx:key="index">
-        <view class="order-item" bindtap="viewOrderDetail" data-id="{{item.id}}">
-          <view class="order-info">
-            <text class="order-title">{{item.title}}</text>
-            <text class="order-status">{{item.status}}</text>
-          </view>
-          <text class="order-time">{{item.time}}</text>
-        </view>
-      </block>
+  <!-- 功能列表 -->
+  <view class="features-list">
+    <view class="feature-item" bindtap="navigateToAddress">
+      <image src="cloud://your-env.xxxx/address.png"></image>
+      <text>收货地址</text>
+      <text class="arrow">></text>
     </view>
-    
-
+    <view class="feature-item" bindtap="contactService">
+      <image src="cloud://your-env.xxxx/service.png"></image>
+      <text>联系客服</text>
+      <text class="arrow">></text>
+    </view>
+    <view class="feature-item" bindtap="navigateToAbout">
+      <image src="cloud://your-env.xxxx/about.png"></image>
+      <text>关于我们</text>
+      <text class="arrow">></text>
+    </view>
+    <view class="feature-item" bindtap="navigateToSettings">
+      <image src="cloud://your-env.xxxx/settings.png"></image>
+      <text>设置</text>
+      <text class="arrow">></text>
+    </view>
   </view>
-</view>
+
+  <!-- 退出登录按钮 -->
+  <view class="logout-button" bindtap="handleLogout" wx:if="{{isLoggedIn}}">
+    退出登录
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>版本 1.0.0</text>
+  </view>
+</view> 

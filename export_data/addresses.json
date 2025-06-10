@@ -1,0 +1,15 @@
+[
+  {
+    "_id": "682e8cb9459d02b127f59385",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "receiver": "小欧",
+    "contact": "18716910022",
+    "province": "北京市",
+    "city": "北京",
+    "district": "朝阳区",
+    "detail": "昭阳区110",
+    "isDefault": true,
+    "createdAt": "2025-05-22T02:32:25.833Z",
+    "__v": 0
+  }
+]

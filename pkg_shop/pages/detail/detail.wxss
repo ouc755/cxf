@@ -1,0 +1,261 @@
+/* pages/detail/detail.wxss */
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  padding: 120rpx 32rpx 32rpx;
+  background: #f8fafc;
+  border-radius: 48rpx;
+  box-shadow: 0 8rpx 40rpx rgba(0,0,0,0.08);
+  margin: 24rpx;
+}
+
+.toy-info {
+  background: #ffffff;
+  padding: 40rpx;
+  border-radius: 32rpx;
+  margin-bottom: 48rpx;
+  box-shadow: 0 4rpx 24rpx rgba(0,0,0,0.06);
+}
+
+.title {
+  font-size: 44rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.buy-btn:active {
+  opacity: 0.9;
+  transform: translateY(2rpx);
+}
+
+/* 价格样式 */
+.toy-price {
+  font-size: 40rpx;
+  font-family: 'Roboto', sans-serif;
+  color: #ff4757;
+  margin: 32rpx 0 48rpx;
+  letter-spacing: 1rpx;
+}
+
+/* 规格选择模块 */
+.spec-selection {
+  margin: 40rpx 0;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx; /* 可选，设置规格组之间的间距 */
+}
+
+.spec-group {
+  margin: 30rpx 0;
+}
+
+.spec-group-half {
+  flex: 1;
+  width: calc(50% - 10rpx); /* 假设 gap 是 20rpx，则每个元素减去 gap 的一半 */
+  /* 或者可以设置具体的宽度，例如 width: 48%; */
+}
+
+.sub-title {
+  font-size: 30rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.option-list {
+  display: flex;
+  gap: 10rpx; /* 调整按钮之间的间距 */
+  flex-wrap: wrap;
+  /* justify-content: space-between; */ /* 当按钮数量不足以填满一行时，可能会导致间距过大，可以注释掉或调整 */
+}
+
+.spec-option {
+  padding: 10rpx 12rpx; /* 进一步减小内边距 */
+  line-height: 1.2;
+  height: 60rpx; /* 进一步减小高度 */
+  flex-grow: 1;
+  min-width: 0; /* 允许按钮宽度根据内容和父容器宽度自适应，不再设置最小宽度 */
+  width: 100%; /* 让按钮宽度充满其父容器 .spec-group-half 的可用空间 */
+  border: 1rpx solid #e9ecef;
+  border-radius: 8rpx; /* 进一步减小圆角 */
+  background: #ffffff;
+  font-size: 24rpx; /* 进一步减小字体大小 */
+  color: #495057;
+  margin: 4rpx 0; /* 进一步减小外边距 */
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  box-shadow: 0 1rpx 4rpx rgba(0,0,0,0.03);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* .spec-option:nth-child(3n) {
+  margin-right: 0;
+} */ /* 这个规则在新的布局下可能不再需要，或者需要调整 */
+
+.spec-option.active,
+button.spec-option.active {
+  background: #007bff !important;
+  color: white !important;
+  border-color: #007bff !important;
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(0, 123, 255, 0.2);
+}
+
+/* 模块标题样式 */
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #555;
+  margin: 30rpx 0 20rpx;
+  display: block;
+}
+
+/* 商品描述样式 */
+.toy-desc {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.5;
+  padding: 20rpx 0;
+}
+
+.product-specs {
+  border: 2rpx solid #e0e0e0;
+  background: #fff;
+  padding: 32rpx;
+  border-radius: 24rpx;
+  margin: 30rpx 0;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: #666;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.spec-item:last-child {
+  border-bottom: none;
+}
+
+.spec-label {
+  color: #333;
+  font-weight: 500;
+}
+
+.spec-value {
+  color: #888;
+}
+
+.cart-btn {
+  background: #66b3ff;
+  color: #fff;
+  font-weight: bold;
+  font-size: 32rpx;
+  padding: 32rpx 40rpx;
+  border-radius: 10rpx;
+}
+
+.buy-btn {
+  background: #ff4d4d;
+  color: #fff;
+  font-weight: bold;
+  font-size: 32rpx;
+  padding: 32rpx 40rpx;
+  border-radius: 10rpx;
+}
+
+.buy-btn,
+.cart-btn {
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  margin: 20rpx 0;
+  width: 100%;
+  text-align: center;
+}
+
+.toy-img {
+  width: 100%;
+  height: auto;
+  padding: 0 20rpx;
+  border-radius: 16rpx;
+  margin-bottom: 48rpx;
+  background: #ffffff;
+  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.12);
+  object-fit: cover;
+}
+
+.specs-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.size-selector {
+  flex: 1;
+}
+
+.favorite-btn {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.heart-icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.favorite-btn.active {
+  transform: scale(1.2);
+}
+
+.favorite-btn.active .heart-icon {
+  filter: drop-shadow(0 2rpx 4rpx rgba(255, 0, 0, 0.3));
+}
+
+.size-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 20rpx;
+}
+
+.size-btn {
+  margin: 10rpx 15rpx 10rpx 0;
+  padding: 8rpx 25rpx;
+  border: 1rpx solid #eee;
+  border-radius: 40rpx;
+}
+
+.size-btn.selected {
+  background: #ff4444;
+  color: white;
+  border-color: #ff4444;
+}
+
+/* 规格按钮统一激活态 */
+.spec-option.active {
+  border-color: #1890ff;
+  background: #e6f7ff;
+  color: #1890ff;
+  transform: scale(1.05);
+}

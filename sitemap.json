@@ -1,0 +1,19 @@
+{
+  "desc": "玩具商城小程序的索引配置文件",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "pages/index/index",
+      "params": [],
+      "matching": "exact",
+      "priority": 1000
+    },
+    {
+      "action": "allow",
+      "page": "pages/product/product",
+      "params": ["id"],
+      "matching": "exact",
+      "priority": 900
+    }
+  ]
+} 

@@ -1,0 +1,93 @@
+<view class="admin-container">
+  <block wx:if="{{!loading}}">
+    <!-- 管理员界面 -->
+    <!-- 顶部标签页 -->
+    <view class="tabs">
+      <view class="tab {{currentTab === 'carts' ? 'active' : ''}}" 
+            bindtap="switchTab" 
+            data-tab="carts">
+        购物车管理
+      </view>
+      <view class="tab {{currentTab === 'products' ? 'active' : ''}}" 
+            bindtap="switchTab" 
+            data-tab="products">
+        商品管理
+      </view>
+    </view>
+
+    <!-- 购物车列表 -->
+    <view class="cart-list" wx:if="{{currentTab === 'carts'}}">
+      <block wx:if="{{cartList.length > 0}}">
+        <view class="cart-item" wx:for="{{cartList}}" wx:key="_id">
+          <!-- 用户信息 -->
+          <view class="user-info">
+            <image class="avatar" 
+                   src="{{item.userInfo.avatarUrl || defaultAvatarUrl}}" 
+                   mode="aspectFill"></image>
+            <text class="nickname">{{item.userInfo.nickName || '未知用户'}}</text>
+          </view>
+          
+          <!-- 购物车商品列表 -->
+          <view class="products">
+            <view class="product" wx:for="{{item.products}}" wx:key="id" wx:for-item="product">
+              <image class="product-image" 
+                     src="{{product.imageUrl || defaultProductUrl}}" 
+                     mode="aspectFill"></image>
+              <view class="product-info">
+                <text class="product-name">{{product.name}}</text>
+                <text class="product-price">¥{{product.price}}</text>
+                <text class="product-quantity">x{{product.quantity}}</text>
+              </view>
+            </view>
+          </view>
+          
+          <!-- 操作按钮 -->
+          <view class="actions">
+            <button class="btn btn-primary" bindtap="viewOrder" data-id="{{item._id}}">查看订单</button>
+            <button class="btn btn-danger" bindtap="deleteCart" data-id="{{item._id}}">删除</button>
+          </view>
+        </view>
+      </block>
+      <view class="empty" wx:else>暂无购物车数据</view>
+    </view>
+
+    <!-- 商品列表 -->
+    <view class="product-list" wx:if="{{currentTab === 'products'}}">
+      <!-- 添加商品按钮 -->
+      <view class="add-product" bindtap="navigateToAddProduct">
+        <text class="icon">+</text>
+        <text>添加商品</text>
+      </view>
+      
+      <!-- 商品列表 -->
+      <block wx:if="{{productList.length > 0}}">
+        <view class="product-item" wx:for="{{productList}}" wx:key="_id">
+          <image class="product-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+          <view class="product-info">
+            <text class="product-name">{{item.name}}</text>
+            <!-- 规格信息 -->
+            <view class="product-specs" wx:if="{{item.specifications && item.specifications.length}}">
+              <text class="spec-label">规格：</text>
+              <text class="spec-value">{{item.specifications.join('、')}}</text>
+            </view>
+            <!-- 价格组合 -->
+            <view class="product-prices" wx:if="{{item.prices && item.prices.length}}">
+              <view class="price-item" wx:for="{{item.prices}}" wx:for-item="price" wx:key="combination">
+                <text class="combination">{{price.combination}}</text>
+                <text class="price">¥{{price.price}}</text>
+              </view>
+            </view>
+            <!-- 单一价格 -->
+            <text class="product-price" wx:else>¥{{item.price}}</text>
+          </view>
+          <view class="actions">
+            <button class="btn btn-primary" bindtap="editProduct" data-id="{{item._id}}">编辑</button>
+            <button class="btn btn-danger" bindtap="deleteProduct" data-id="{{item._id}}">删除</button>
+          </view>
+        </view>
+      </block>
+      <view class="empty" wx:else>暂无商品数据</view>
+    </view>
+  </block>
+  <view class="loading" wx:else>加载中...</view>
+</view> 

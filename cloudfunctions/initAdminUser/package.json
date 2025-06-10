@@ -1,0 +1,9 @@
+{
+  "name": "initAdminUser",
+  "version": "1.0.0",
+  "description": "Initialize admin user",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+} 

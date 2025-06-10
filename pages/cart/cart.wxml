@@ -1,0 +1,74 @@
+<view class="cart-container">
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{isLoading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 空购物车 -->
+  <view class="empty-cart" wx:elif="{{!cartItems.length}}">
+    <image class="empty-cart-icon" src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/default/empty-cart.png" mode="aspectFit"></image>
+    <text class="empty-cart-text">购物车还是空的</text>
+  </view>
+
+  <!-- 购物车列表 -->
+  <view wx:else>
+    <view class="cart-item" wx:for="{{cartItems}}" wx:key="_id">
+      <!-- 选择框 -->
+      <image 
+        class="checkbox" 
+        src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/{{item.selected ? 'checkbox-selected.png' : 'checkbox-normal.png'}}"
+        bindtap="toggleSelect"
+        data-id="{{item._id}}"
+      ></image>
+
+      <!-- 商品图片 -->
+      <image class="product-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+
+      <!-- 商品信息 -->
+      <view class="product-info">
+        <text class="product-name">{{item.name}}</text>
+        <text class="product-spec" wx:if="{{item.specification}}">{{item.specification}}</text>
+        
+        <view class="price-quantity">
+          <text class="price">¥{{item.price}}</text>
+          <view class="quantity-control">
+            <view class="quantity-btn" bindtap="changeQuantity" data-id="{{item._id}}" data-value="{{-1}}">-</view>
+            <text class="quantity">{{item.quantity}}</text>
+            <view class="quantity-btn" bindtap="changeQuantity" data-id="{{item._id}}" data-value="{{1}}">+</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 删除按钮 -->
+      <image 
+        class="delete-btn" 
+        src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/delete.png"
+        bindtap="removeItem"
+        data-id="{{item._id}}"
+      ></image>
+    </view>
+  </view>
+
+  <!-- 底部结算栏 -->
+  <view class="cart-footer" wx:if="{{cartItems.length}}">
+    <view class="select-all" bindtap="toggleSelectAll">
+      <image 
+        class="checkbox" 
+        src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/{{isSelectAll ? 'checkbox-selected.png' : 'checkbox-normal.png'}}"
+      ></image>
+      <text>全选</text>
+    </view>
+
+    <view class="total-section">
+      <text>合计：</text>
+      <text class="total-price">¥{{totalPrice}}</text>
+    </view>
+
+    <view 
+      class="checkout-btn {{selectedCount === 0 ? 'disabled' : ''}}" 
+      bindtap="handleCheckout"
+    >
+      结算({{selectedCount}})
+    </view>
+  </view>
+</view> 

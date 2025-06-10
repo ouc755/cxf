@@ -1,0 +1,30 @@
+<view class="login-container">
+  <view class="login-header">
+    <image class="logo" src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/default/default-avatar.png" mode="aspectFit"></image>
+    <text class="title">欢迎来到玩具商城</text>
+    <text class="subtitle">一键登录，体验更多功能</text>
+  </view>
+  
+  <view class="login-content">
+    <button 
+      class="login-btn" 
+      type="primary" 
+      bindtap="getUserProfile"
+      loading="{{isLoggingIn}}"
+      hover-class="none"
+    >
+      微信一键登录
+    </button>
+    
+    <view class="tips">
+      <text>登录即表示同意</text>
+      <text style="color: #07c160; display: inline">《用户服务协议》</text>
+      <text>和</text>
+      <text style="color: #07c160; display: inline">《隐私政策》</text>
+    </view>
+  </view>
+
+  <view class="version">
+    <text>版本 1.0.0</text>
+  </view>
+</view> 

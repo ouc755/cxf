@@ -1,28 +1,45 @@
 {
-  "appid": "wxd0a6320d6a883527",
-  "compileType": "miniprogram",
-  "libVersion": "3.8.1",
+  "description": "项目配置文件",
   "packOptions": {
     "ignore": [],
     "include": []
   },
+  "miniprogramRoot": "",
+  "compileType": "miniprogram",
+  "projectname": "玩具商城",
   "setting": {
-    "coverView": true,
-    "es6": true,
-    "postcss": true,
-    "minified": true,
-    "enhance": true,
-    "showShadowRootInWxmlPanel": true,
-    "packNpmRelationList": [],
+    "useCompilerPlugins": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    }
+    },
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "coverView": true,
+    "showShadowRootInWxmlPanel": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "useStaticServer": true,
+    "showES6CompileOption": false,
+    "checkInvalidKey": true,
+    "disableUseStrict": false,
+    "swc": false,
+    "disableSWC": true,
+    "compileWorklet": true,
+    "minifyWXML": true,
+    "uglifyFileName": true
   },
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  }
+  },
+  "libVersion": "3.0.0",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "cloud": true,
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
 }

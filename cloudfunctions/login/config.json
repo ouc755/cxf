@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "openapi": [
+      "auth.getOpenData",
+      "wxacode.get",
+      "templateMessage.send",
+      "templateMessage.addTemplate",
+      "templateMessage.deleteTemplate",
+      "templateMessage.getTemplateList",
+      "templateMessage.getTemplateLibraryById",
+      "templateMessage.getTemplateLibraryList"
+    ]
+  }
+} 

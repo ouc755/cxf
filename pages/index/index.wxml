@@ -1,21 +1,89 @@
-<!--pages/index/index.wxml-->
-<view class="container">
-  <view class="toys-list">
-    <view class="toy-item" wx:for="{{toysList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
-      <image src="{{item.image}}" mode="aspectFit" class="toy-img"/>
-      <view class="toy-info">
-        <text class="toy-name">{{item.name}}</text>
-        <text class="toy-price">¥{{item.price}}</text>
-        <text class="toy-desc">{{item.desc}}</text>
+  <view class="container">
+  <!-- 轮播图部分 -->
+  <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="500" circular="true">
+    <!-- 循环渲染轮播图片 -->
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <!-- mode="aspectFill" 保持纵横比缩放图片，使图片的短边能完全显示出来 -->
+      <image src="{{item.imageUrl}}" mode="aspectFill" class="banner-image"/>
+    </swiper-item>
+  </swiper>
+
+  <!-- 分类导航 -->
+  <view class="category-list">
+    <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="onCategoryTap" data-id="{{item.id}}" data-name="{{item.name}}">
+      <view class="category-icon-wrapper {{item.class}}">
+        <icon type="{{item.icon}}" size="28" color="{{item.color}}"></icon>
+      </view>
+      <text class="category-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-box">
+    <icon type="search" size="15" color="#999"/>
+    <input 
+      type="text" 
+      value="{{searchValue}}"
+      placeholder="搜索玩具" 
+      placeholder-class="search-placeholder" 
+      confirm-type="search"
+      bindinput="onSearchInput"
+      bindconfirm="onSearchConfirm"
+    />
+    <icon wx:if="{{searchValue.length > 0}}" type="clear" size="15" color="#999" bindtap="clearSearch" class="clear-icon"/>
+  </view>
+
+  <!-- 搜索结果展示区 -->
+  <view class="section" wx:if="{{isSearching}}">
+    <view class="section-header">
+      <view class="section-title">搜索结果</view>
+      <view class="back-btn" bindtap="backToHome">
+        <text>返回首页</text>
+      </view>
+    </view>
+    <view class="product-list">
+      <view class="product-card" wx:for="{{filteredProducts}}" wx:key="_id">
+        <view class="product-content" bindtap="onProductTap" data-id="{{item._id}}">
+          <image class="product-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+          <view class="product-info">
+            <view class="product-title">{{item.name}}</view>
+            <view class="product-meta">
+              <text class="product-price">￥{{item.displayPrice}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="product-btn" catchtap="onBuyNow" data-id="{{item._id}}">
+          <button class="buy-btn">立即购买</button>
+        </view>
+      </view>
+      <!-- 无搜索结果时显示 -->
+      <view class="no-result" wx:if="{{filteredProducts.length === 0}}">
+        <text>未找到相关商品</text>
+        <view class="back-btn-center" bindtap="backToHome">
+          <text>返回首页</text>
+        </view>
       </view>
     </view>
   </view>
 
-  <!-- 底部导航栏 -->
-  <view class="bottom-nav">
-    <view class="nav-btn" wx:for="{{[]}}" wx:key="index" data-index="{{index}}" bindtap="switchTab">
-      <image src="../../images/{{item}}.png" class="nav-icon"/>
-      <text>{{item}}</text>
+  <!-- 热门商品展示区 -->
+  <view class="section" wx:if="{{!isSearching}}">
+    <view class="section-title">热门玩具</view>
+    <view class="product-list">
+      <view class="product-card" wx:for="{{hotProducts}}" wx:key="_id">
+        <view class="product-content" bindtap="onProductTap" data-id="{{item._id}}">
+          <image class="product-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+          <view class="product-info">
+            <view class="product-title">{{item.name}}</view>
+            <view class="product-meta">
+              <text class="product-price">￥{{item.displayPrice}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="product-btn" catchtap="onBuyNow" data-id="{{item._id}}">
+          <button class="buy-btn">立即购买</button>
+        </view>
+      </view>
     </view>
   </view>
-</view>
+</view> 

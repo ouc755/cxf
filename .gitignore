@@ -12,3 +12,48 @@ $RECYCLE.BIN/
 
 # Node.js
 node_modules/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# 保留双下划线目录（不忽略）
+!**/__*__/
+
+# 保留指定目录
+!donutAuthorize__/
+
+# 忽略指定缓存目录
+.venv/Lib/site-packages/__pycache__/
+
+# WeChat Mini Program specific
+miniprogram_npm/
+dist/
+
+# IDE specific
+.idea/
+.vscode/
+
+# Local configuration
+project.config.json
+project.private.config.json
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+tmp/
+temp/
+
+# Coverage directory
+coverage/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache

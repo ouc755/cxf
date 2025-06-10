@@ -1,4 +1,7 @@
-page {
-  /* 背景图已迁移至各页面wxml文件 */
-}
-/* 全局样式，可根据需要调整 */
+/**app.wxss**/
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+} 

@@ -1,0 +1,135 @@
+<view class="container">
+  <form bindsubmit="handleSubmit">
+    <!-- 商品图片 -->
+    <view class="form-group">
+      <view class="label">商品图片</view>
+      <view class="image-upload" bindtap="chooseImage">
+        <image wx:if="{{imageUrl}}" src="{{imageUrl}}" mode="aspectFill"></image>
+        <view wx:else class="upload-placeholder">
+          <text class="iconfont icon-camera"></text>
+          <text>点击上传图片</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 商品名称 -->
+    <view class="form-group">
+      <view class="label">商品名称</view>
+      <input class="input" name="name" value="{{product.name}}" placeholder="请输入商品名称"/>
+    </view>
+
+    <!-- 商品简介 -->
+    <view class="form-group">
+      <view class="label">商品简介</view>
+      <textarea class="textarea" name="description" value="{{product.description}}" placeholder="请输入商品简介"/>
+    </view>
+
+    <!-- 商品颜色 -->
+    <view class="form-group">
+      <view class="label">商品颜色</view>
+      <view class="colors">
+        <view class="color-list">
+          <view class="color-item" wx:for="{{colors}}" wx:key="index">
+            <input class="input" 
+                  data-index="{{index}}" 
+                  value="{{item}}" 
+                  placeholder="输入颜色" 
+                  bindchange="handleColorChange"/>
+            <view class="color-actions">
+              <button class="delete-btn" data-index="{{index}}" bindtap="deleteColor">删除</button>
+            </view>
+          </view>
+        </view>
+        <button class="add-variant-btn" bindtap="addColor">添加颜色</button>
+      </view>
+    </view>
+
+    <!-- 商品规格和价格 -->
+    <view class="form-group">
+      <view class="label">商品规格和价格</view>
+      <view class="variants">
+        <view class="variant-item" wx:for="{{variants}}" wx:key="index">
+          <view class="variant-row">
+            <view class="variant-inputs">
+              <input class="input" 
+                    data-index="{{index}}" 
+                    data-field="specification" 
+                    value="{{item.specification}}" 
+                    placeholder="款式" 
+                    bindchange="handleVariantChange"/>
+              <input class="input" 
+                    data-index="{{index}}" 
+                    data-field="size" 
+                    value="{{item.size}}" 
+                    placeholder="尺寸" 
+                    bindchange="handleVariantChange"/>
+              <input class="input price-input" 
+                    type="digit" 
+                    data-index="{{index}}" 
+                    data-field="price" 
+                    value="{{item.price}}" 
+                    placeholder="价格" 
+                    bindchange="handleVariantChange"/>
+            </view>
+            <view class="variant-actions">
+              <button class="delete-btn" data-index="{{index}}" bindtap="deleteVariant">删除</button>
+            </view>
+          </view>
+        </view>
+      </view>
+      <button class="add-variant-btn" bindtap="addVariant">添加款式和价格</button>
+    </view>
+
+    <!-- 自定义商品属性 -->
+    <view class="form-group">
+      <view class="label">自定义商品属性</view>
+      <view class="custom-properties">
+        <view class="property-item" wx:for="{{customProperties}}" wx:key="index">
+          <view class="property-header">
+            <text class="property-name">{{item.name}}</text>
+            <button class="delete-btn" data-index="{{index}}" bindtap="deleteCustomProperty">删除</button>
+          </view>
+          <view class="property-values">
+            <view class="value-tag" wx:for="{{item.values}}" wx:for-item="value" wx:for-index="valueIndex" wx:key="valueIndex">
+              {{value}}
+              <text class="value-delete" data-property-index="{{index}}" data-value-index="{{valueIndex}}" bindtap="deletePropertyValue">×</text>
+            </view>
+            <input class="value-input" 
+                  data-index="{{index}}" 
+                  placeholder="添加新值" 
+                  bindconfirm="addPropertyValue"
+                  value="{{item.currentValue}}"
+                  bindblur="clearPropertyInput"/>
+          </view>
+        </view>
+      </view>
+      <button class="add-variant-btn" bindtap="showCustomPropertyDialog">添加自定义属性</button>
+    </view>
+
+    <!-- 自定义属性弹窗 -->
+    <view class="custom-property-dialog" wx:if="{{showPropertyDialog}}">
+      <view class="dialog-mask" bindtap="hideCustomPropertyDialog"></view>
+      <view class="dialog-content">
+        <view class="dialog-header">
+          <text>添加自定义属性</text>
+          <text class="dialog-close" bindtap="hideCustomPropertyDialog">×</text>
+        </view>
+        <view class="dialog-body">
+          <input class="input" 
+                placeholder="输入属性名称" 
+                value="{{newPropertyName}}"
+                bindinput="handleNewPropertyNameInput"/>
+        </view>
+        <view class="dialog-footer">
+          <button class="dialog-btn cancel" bindtap="hideCustomPropertyDialog">取消</button>
+          <button class="dialog-btn confirm" bindtap="addCustomProperty">确定</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <view class="form-group">
+      <button class="submit-btn" form-type="submit">保存商品</button>
+    </view>
+  </form>
+</view> 

@@ -1,0 +1,43 @@
+<!--pages/admin/carts/carts.wxml-->
+<view class="container">
+  <!-- 购物车列表 -->
+  <view class="carts-list">
+    <block wx:if="{{carts.length > 0}}">
+      <view class="cart-item" wx:for="{{carts}}" wx:key="_id">
+        <view class="user-info">
+          <image class="avatar" src="{{item.userAvatar}}" mode="aspectFill"></image>
+          <text class="nickname">{{item.userNickName}}</text>
+        </view>
+        <view class="cart-content">
+          <view class="products">
+            <view class="product" wx:for="{{item.products}}" wx:key="id" wx:for-item="product">
+              <image class="product-image" src="{{product.image}}" mode="aspectFill"></image>
+              <view class="product-info">
+                <text class="product-name">{{product.name}}</text>
+                <text class="product-price">¥{{product.price}}</text>
+                <text class="product-quantity">x{{product.quantity}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="cart-footer">
+            <text class="update-time">更新时间：{{item.updateTime}}</text>
+            <text class="total-price">总价：¥{{item.totalPrice}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view wx:elif="{{!isLoading}}" class="empty-tip">
+      <text>暂无购物车数据</text>
+    </view>
+  </view>
+
+  <!-- 加载中提示 -->
+  <view class="loading" wx:if="{{isLoading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 加载完成提示 -->
+  <view class="load-all" wx:if="{{!isLoading && currentPage >= totalPages && carts.length > 0}}">
+    <text>已加载全部数据</text>
+  </view>
+</view>

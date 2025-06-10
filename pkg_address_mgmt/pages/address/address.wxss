@@ -1,0 +1,19 @@
+.add-btn {
+  position: fixed;
+  bottom: 40rpx;
+  left: 30rpx;
+  right: 30rpx;
+  background: linear-gradient(135deg, #007bff, #00a8ff);
+  color: #ffffff;
+  border-radius: 48rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 123, 255, 0.3);
+  font-size: 32rpx;
+  padding: 25rpx 0;
+  z-index: 999;
+  text-align: center;
+}
+
+.add-btn:active {
+  opacity: 0.9;
+  transform: scale(0.98);
+}

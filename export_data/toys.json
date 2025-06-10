@@ -1,0 +1,134 @@
+[
+  {
+    "_id": "6826dd7106a4d8bc95d30582",
+    "originalId": 1,
+    "name": "毛绒熊玩偶",
+    "price": 299,
+    "image": "/images/bear.png",
+    "desc": "柔软舒适的毛绒熊玩偶",
+    "size": "25cm",
+    "category": "热销榜单",
+    "__v": 0
+  },
+  {
+    "_id": "6826dd7106a4d8bc95d30583",
+    "originalId": 2,
+    "name": "积木玩具",
+    "price": 99,
+    "image": "/images/blocks.png",
+    "desc": "益智拼装积木",
+    "size": "30颗粒",
+    "category": "新品上架",
+    "__v": 0
+  },
+  {
+    "_id": "6826dd7106a4d8bc95d30584",
+    "originalId": 3,
+    "name": "遥控赛车",
+    "price": 129.9,
+    "image": "/images/car.png",
+    "desc": "可遥控四驱赛车",
+    "size": "1:24",
+    "category": "遥控模型",
+    "__v": 0
+  },
+  {
+    "_id": "6826dd7106a4d8bc95d30585",
+    "originalId": 4,
+    "name": "拼图玩具",
+    "price": 59.9,
+    "image": "/images/puzzle.png",
+    "desc": "100片卡通拼图",
+    "size": "小",
+    "category": "益智玩具",
+    "__v": 0
+  },
+  {
+    "_id": "6826dd7106a4d8bc95d30586",
+    "originalId": 5,
+    "name": "音乐盒",
+    "price": 79.9,
+    "image": "/images/musicbox.png",
+    "desc": "旋转木马八音盒",
+    "size": "小型",
+    "category": "音乐玩具",
+    "__v": 0
+  },
+  {
+    "_id": "6826dd7106a4d8bc95d30587",
+    "originalId": 6,
+    "name": "小熊钥匙扣",
+    "price": 19.9,
+    "image": "/images/bear.png",
+    "desc": "迷你毛绒熊钥匙扣",
+    "size": "超小",
+    "category": "热销榜单",
+    "__v": 0
+  },
+  {
+    "_id": "6826dd7106a4d8bc95d30588",
+    "originalId": 7,
+    "name": "毛绒熊挂件",
+    "price": 29.9,
+    "image": "/images/bear.png",
+    "desc": "迷你便携毛绒挂件",
+    "size": "超小",
+    "category": "热销榜单",
+    "__v": 0
+  },
+  {
+    "_id": "6826dd7106a4d8bc95d30589",
+    "originalId": 8,
+    "name": "基础积木组",
+    "price": 79,
+    "image": "/images/blocks.png",
+    "desc": "入门级积木套装",
+    "size": "中",
+    "category": "新品上架",
+    "__v": 0
+  },
+  {
+    "_id": "6826dd7106a4d8bc95d3058a",
+    "originalId": 9,
+    "name": "赛车模型套装",
+    "price": 159,
+    "image": "/images/car.png",
+    "desc": "四驱遥控赛车套装",
+    "size": "大",
+    "category": "遥控模型",
+    "__v": 0
+  },
+  {
+    "_id": "6826dd7106a4d8bc95d3058b",
+    "originalId": 10,
+    "name": "音乐盒礼盒",
+    "price": 129,
+    "image": "/images/musicbox.png",
+    "desc": "圣诞主题音乐盒套装",
+    "size": "小",
+    "category": "礼品套装",
+    "__v": 0
+  },
+  {
+    "_id": "6826dd7106a4d8bc95d3058c",
+    "originalId": 11,
+    "name": "积木火车套装",
+    "price": 159,
+    "image": "/images/blocks.png",
+    "desc": "豪华版积木火车套装",
+    "size": "大",
+    "category": "新品上架",
+    "__v": 0
+  },
+  {
+    "_id": "6826dd7106a4d8bc95d3058d",
+    "originalId": 12,
+    "name": "遥控越野车",
+    "price": 199,
+    "image": "/images/car.png",
+    "desc": "全地形四驱遥控车",
+    "size": "标准",
+    "category": "遥控模型",
+    "__v": 0
+  }
+]

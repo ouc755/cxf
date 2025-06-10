@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "openapi": []
+  },
+  "functionConf": {
+    "timeout": 20,
+    "memory": 512,
+    "envVariables": {
+      "NODE_ENV": "production"
+    }
+  }
+} 

@@ -1,0 +1,29 @@
+<view class="admin-login-container">
+  <view class="login-box">
+    <view class="title">管理员登录</view>
+    
+    <view class="input-group">
+      <view class="input-item">
+        <text class="label">用户名</text>
+        <input type="text" 
+               placeholder="请输入管理员用户名" 
+               value="{{username}}" 
+               bindinput="onUsernameInput"
+        />
+      </view>
+      
+      <view class="input-item">
+        <text class="label">密码</text>
+        <input type="password" 
+               placeholder="请输入管理员密码" 
+               value="{{password}}" 
+               bindinput="onPasswordInput"
+        />
+      </view>
+    </view>
+
+    <button class="login-btn" bindtap="handleLogin" loading="{{loading}}">
+      登录
+    </button>
+  </view>
+</view> 

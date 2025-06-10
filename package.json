@@ -1,0 +1,20 @@
+{
+  "name": "toy-shop-miniprogram",
+  "version": "1.0.0",
+  "description": "玩具商城小程序",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.22.5",
+    "wx-server-sdk": "^3.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/plugin-transform-runtime": "^7.27.4",
+    "@babel/preset-env": "^7.27.2"
+  }
+}

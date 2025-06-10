@@ -1,0 +1,687 @@
+[
+  {
+    "_id": "6826df2fbe3fe74c7142fb69",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30588",
+        "quantity": 1,
+        "specs": {
+          "specification": "普通款",
+          "size": "超小"
+        },
+        "_id": "6826df2fbe3fe74c7142fb6a"
+      }
+    ],
+    "totalAmount": 29.9,
+    "status": 3,
+    "shippingAddress": "6822f607d39056bbc8d522e4",
+    "createdAt": "2025-05-16T06:46:07.191Z",
+    "__v": 0
+  },
+  {
+    "_id": "6826eb4cbe3fe74c7142fbc9",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30584",
+        "quantity": 1,
+        "specs": {
+          "specification": "标准版",
+          "size": "1:24"
+        },
+        "_id": "6826eb4cbe3fe74c7142fbca"
+      }
+    ],
+    "totalAmount": 129.9,
+    "status": 3,
+    "shippingAddress": "6822f607d39056bbc8d522e4",
+    "createdAt": "2025-05-16T07:37:48.395Z",
+    "__v": 0
+  },
+  {
+    "_id": "682bcc5546e21b9139f75ba2",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30583",
+        "quantity": 1,
+        "price": 99,
+        "specs": {
+          "specification": "基础款",
+          "size": "30颗粒"
+        },
+        "_id": "682bcc5546e21b9139f75ba3"
+      }
+    ],
+    "totalAmount": 99,
+    "status": 3,
+    "shippingAddress": "6822f607d39056bbc8d522e4",
+    "createdAt": "2025-05-20T00:27:01.532Z",
+    "__v": 0
+  },
+  {
+    "_id": "682be55f46e21b9139f75e23",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30583",
+        "quantity": 1,
+        "price": 99,
+        "specs": {
+          "specification": "基础款",
+          "size": "30颗粒"
+        },
+        "_id": "682be55f46e21b9139f75e24"
+      }
+    ],
+    "totalAmount": 99,
+    "status": 3,
+    "shippingAddress": "6822f607d39056bbc8d522e4",
+    "createdAt": "2025-05-20T02:13:51.813Z",
+    "__v": 0
+  },
+  {
+    "_id": "682c3c57a5912ab2cfbf119f",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30583",
+        "quantity": 1,
+        "price": 99,
+        "_id": "682c3c57a5912ab2cfbf11a0"
+      }
+    ],
+    "totalAmount": 99,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-20T08:24:55.687Z",
+    "__v": 0
+  },
+  {
+    "_id": "682c3c5ea5912ab2cfbf11a9",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30583",
+        "quantity": 1,
+        "price": 99,
+        "_id": "682c3c5ea5912ab2cfbf11aa"
+      }
+    ],
+    "totalAmount": 99,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-20T08:25:02.877Z",
+    "__v": 0
+  },
+  {
+    "_id": "682c3c67a5912ab2cfbf11b3",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30589",
+        "quantity": 1,
+        "price": 79,
+        "_id": "682c3c67a5912ab2cfbf11b4"
+      }
+    ],
+    "totalAmount": 79,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-20T08:25:11.869Z",
+    "__v": 0
+  },
+  {
+    "_id": "682c434da5912ab2cfbf11bd",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30589",
+        "quantity": 1,
+        "price": 79,
+        "_id": "682c434da5912ab2cfbf11be"
+      }
+    ],
+    "totalAmount": 79,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-20T08:54:37.186Z",
+    "__v": 0
+  },
+  {
+    "_id": "682c4351a5912ab2cfbf11c7",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30589",
+        "quantity": 1,
+        "price": 79,
+        "_id": "682c4351a5912ab2cfbf11c8"
+      }
+    ],
+    "totalAmount": 79,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-20T08:54:41.503Z",
+    "__v": 0
+  },
+  {
+    "_id": "682c436aa5912ab2cfbf11d2",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30582",
+        "quantity": 1,
+        "price": 299,
+        "_id": "682c436aa5912ab2cfbf11d3"
+      }
+    ],
+    "totalAmount": 299,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-20T08:55:06.952Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d1e81c022d29368712723",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30587",
+        "quantity": 1,
+        "price": 19.9,
+        "_id": "682d1e81c022d29368712724"
+      }
+    ],
+    "totalAmount": 19.9,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T00:29:53.973Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d20e7c022d29368712948",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30583",
+        "quantity": 1,
+        "price": 99,
+        "_id": "682d20e7c022d29368712949"
+      }
+    ],
+    "totalAmount": 99,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T00:40:07.267Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d20fbc022d29368712952",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30583",
+        "quantity": 1,
+        "price": 99,
+        "_id": "682d20fbc022d29368712953"
+      }
+    ],
+    "totalAmount": 99,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T00:40:27.535Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d235ddd85982f0cfe77fa",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30583",
+        "quantity": 1,
+        "price": 99,
+        "specSummary": "版本: 基础款, 尺寸: 60颗粒",
+        "_id": "682d235ddd85982f0cfe77fb"
+      }
+    ],
+    "totalAmount": 99,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T00:50:37.822Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d242bdd85982f0cfe7804",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30583",
+        "quantity": 1,
+        "price": 99,
+        "specSummary": "版本: 基础款, 尺寸: 30颗粒",
+        "_id": "682d242bdd85982f0cfe7805"
+      }
+    ],
+    "totalAmount": 99,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T00:54:03.749Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d249cdd85982f0cfe7918",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30582",
+        "quantity": 1,
+        "price": 299,
+        "specSummary": "版本: 标准版, 尺寸: 35cm",
+        "_id": "682d249cdd85982f0cfe7919"
+      }
+    ],
+    "totalAmount": 299,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T00:55:56.283Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d291bdd85982f0cfe7b94",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30584",
+        "quantity": 1,
+        "price": 129.9,
+        "specSummary": "无特定规格",
+        "_id": "682d291bdd85982f0cfe7b95"
+      }
+    ],
+    "totalAmount": 129.9,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T01:15:07.843Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d2922dd85982f0cfe7b9e",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30584",
+        "quantity": 1,
+        "price": 129.9,
+        "specSummary": "无特定规格",
+        "_id": "682d2922dd85982f0cfe7b9f"
+      }
+    ],
+    "totalAmount": 129.9,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T01:15:14.617Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d2a39dd85982f0cfe7c8f",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30584",
+        "quantity": 1,
+        "price": 129.9,
+        "specSummary": "无特定规格",
+        "_id": "682d2a39dd85982f0cfe7c90"
+      }
+    ],
+    "totalAmount": 129.9,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T01:19:53.908Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d2a55dd85982f0cfe7c99",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30584",
+        "quantity": 1,
+        "price": 129.9,
+        "specSummary": "无特定规格",
+        "_id": "682d2a55dd85982f0cfe7c9a"
+      }
+    ],
+    "totalAmount": 129.9,
+    "status": 3,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T01:20:21.220Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d714709a6de98938d1b8e",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30589",
+        "quantity": 1,
+        "price": 79,
+        "specSummary": "无特定规格",
+        "_id": "682d714709a6de98938d1b8f"
+      }
+    ],
+    "totalAmount": 79,
+    "status": 0,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T06:23:03.599Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d79e72a348bb3226258a8",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30583",
+        "quantity": 1,
+        "price": 99,
+        "specSummary": "版本: 基础款, 尺寸: 30颗粒",
+        "_id": "682d79e72a348bb3226258a9"
+      }
+    ],
+    "totalAmount": 99,
+    "status": 0,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T06:59:51.646Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d7ba72a348bb3226258b6",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30584",
+        "quantity": 1,
+        "price": 129.9,
+        "specSummary": "无特定规格",
+        "_id": "682d7ba72a348bb3226258b7"
+      }
+    ],
+    "totalAmount": 129.9,
+    "status": 0,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T07:07:19.864Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d7c612a348bb3226258c4",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30582",
+        "quantity": 1,
+        "price": 299,
+        "specSummary": "版本: 标准版, 尺寸: 25cm",
+        "_id": "682d7c612a348bb3226258c5"
+      }
+    ],
+    "totalAmount": 299,
+    "status": 0,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T07:10:25.038Z",
+    "__v": 0
+  },
+  {
+    "_id": "682d7d0e2a348bb3226258ee",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30584",
+        "quantity": 1,
+        "price": 129.9,
+        "specSummary": "无特定规格",
+        "_id": "682d7d0e2a348bb3226258ef"
+      }
+    ],
+    "totalAmount": 129.9,
+    "status": 0,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-21T07:13:18.669Z",
+    "__v": 0
+  },
+  {
+    "_id": "682e761a459d02b127f5919b",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30582",
+        "quantity": 1,
+        "price": 299,
+        "specSummary": "版本: 标准版, 尺寸: 25cm",
+        "_id": "682e761a459d02b127f5919c"
+      }
+    ],
+    "totalAmount": 299,
+    "status": 0,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-22T00:55:54.793Z",
+    "__v": 0
+  },
+  {
+    "_id": "682e7994459d02b127f59243",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30583",
+        "quantity": 1,
+        "price": 99,
+        "specSummary": "版本: 基础款, 尺寸: 30颗粒",
+        "_id": "682e7994459d02b127f59244"
+      }
+    ],
+    "totalAmount": 99,
+    "status": 0,
+    "shippingAddress": "60c72b0f9b1d8c001f8e4b8b",
+    "createdAt": "2025-05-22T01:10:44.798Z",
+    "__v": 0
+  },
+  {
+    "_id": "682e8550459d02b127f5931c",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30584",
+        "quantity": 1,
+        "price": 129.9,
+        "specSummary": "无特定规格",
+        "_id": "682e8550459d02b127f5931d"
+      }
+    ],
+    "totalAmount": 129.9,
+    "status": 0,
+    "shippingAddress": "682d6c3609a6de98938d1520",
+    "createdAt": "2025-05-22T02:00:48.844Z",
+    "__v": 0
+  },
+  {
+    "_id": "682e868f459d02b127f5932c",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30582",
+        "quantity": 1,
+        "price": 299,
+        "specSummary": "版本: 标准版, 尺寸: 25cm",
+        "_id": "682e868f459d02b127f5932d"
+      }
+    ],
+    "totalAmount": 299,
+    "status": 0,
+    "shippingAddress": "682d6c3609a6de98938d1520",
+    "createdAt": "2025-05-22T02:06:07.387Z",
+    "__v": 0
+  },
+  {
+    "_id": "682e8696459d02b127f59336",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30589",
+        "quantity": 1,
+        "price": 79,
+        "specSummary": "无特定规格",
+        "_id": "682e8696459d02b127f59337"
+      }
+    ],
+    "totalAmount": 79,
+    "status": 0,
+    "shippingAddress": "682d6c3609a6de98938d1520",
+    "createdAt": "2025-05-22T02:06:14.890Z",
+    "__v": 0
+  },
+  {
+    "_id": "682e86a2459d02b127f59341",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d3058d",
+        "quantity": 1,
+        "price": 199,
+        "specSummary": "无特定规格",
+        "_id": "682e86a2459d02b127f59342"
+      }
+    ],
+    "totalAmount": 199,
+    "status": 0,
+    "shippingAddress": "682d6c3609a6de98938d1520",
+    "createdAt": "2025-05-22T02:06:26.201Z",
+    "__v": 0
+  },
+  {
+    "_id": "682e8c45459d02b127f5934f",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30589",
+        "quantity": 1,
+        "price": 79,
+        "specSummary": "无特定规格",
+        "_id": "682e8c45459d02b127f59350"
+      }
+    ],
+    "totalAmount": 79,
+    "status": 0,
+    "shippingAddress": "682d6c3609a6de98938d1520",
+    "createdAt": "2025-05-22T02:30:29.863Z",
+    "__v": 0
+  },
+  {
+    "_id": "682e8c52459d02b127f5935a",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d3058c",
+        "quantity": 1,
+        "price": 159,
+        "specSummary": "无特定规格",
+        "_id": "682e8c52459d02b127f5935b"
+      }
+    ],
+    "totalAmount": 159,
+    "status": 0,
+    "shippingAddress": "682d6c1b09a6de98938d151b",
+    "createdAt": "2025-05-22T02:30:42.309Z",
+    "__v": 0
+  },
+  {
+    "_id": "682ebf981d6da039c23b0033",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d3058d",
+        "quantity": 1,
+        "price": 199,
+        "specSummary": "无特定规格",
+        "_id": "682ebf981d6da039c23b0034"
+      }
+    ],
+    "totalAmount": 199,
+    "status": 0,
+    "shippingAddress": "682e8cb9459d02b127f59385",
+    "createdAt": "2025-05-22T06:09:28.538Z",
+    "__v": 0
+  },
+  {
+    "_id": "682fd2fb01a8ec539a08a01f",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30584",
+        "quantity": 1,
+        "price": 129.9,
+        "specSummary": "无特定规格",
+        "_id": "682fd2fb01a8ec539a08a020"
+      }
+    ],
+    "totalAmount": 129.9,
+    "status": 0,
+    "shippingAddress": "682e8cb9459d02b127f59385",
+    "createdAt": "2025-05-23T01:44:27.662Z",
+    "__v": 0
+  },
+  {
+    "_id": "682fe18d01a8ec539a08a076",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30583",
+        "quantity": 1,
+        "price": 99,
+        "specSummary": "版本: 基础款, 尺寸: 30颗粒",
+        "_id": "682fe18d01a8ec539a08a077"
+      }
+    ],
+    "totalAmount": 99,
+    "status": 0,
+    "shippingAddress": "682e8cb9459d02b127f59385",
+    "createdAt": "2025-05-23T02:46:37.873Z",
+    "__v": 0
+  },
+  {
+    "_id": "682fe5d801a8ec539a08a087",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30587",
+        "quantity": 1,
+        "price": 19.9,
+        "specSummary": "无特定规格",
+        "_id": "682fe5d801a8ec539a08a088"
+      }
+    ],
+    "totalAmount": 19.9,
+    "status": 0,
+    "shippingAddress": "682e8cb9459d02b127f59385",
+    "createdAt": "2025-05-23T03:04:56.809Z",
+    "__v": 0
+  },
+  {
+    "_id": "683124677e96830e025fcf66",
+    "userId": "681d97aeb61ec6bb6d26fdfe",
+    "items": [
+      {
+        "product": "6826dd7106a4d8bc95d30582",
+        "quantity": 1,
+        "price": 299,
+        "specSummary": "版本: 标准版, 尺寸: 25cm",
+        "_id": "683124677e96830e025fcf67"
+      }
+    ],
+    "totalAmount": 299,
+    "status": 0,
+    "shippingAddress": "682e8cb9459d02b127f59385",
+    "createdAt": "2025-05-24T01:44:07.349Z",
+    "__v": 0
+  }
+]

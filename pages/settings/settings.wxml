@@ -1,0 +1,44 @@
+<view class="settings-container">
+  <view class="settings-list">
+    <!-- 管理员入口 -->
+    <view class="settings-item" bindtap="navigateToAdminLogin">
+      <view class="item-left">
+        <mp-icon icon="setting" color="#333333" size="{{24}}"></mp-icon>
+        <text>管理员登录</text>
+      </view>
+      <view class="item-right">
+        <mp-icon icon="arrow" color="#CCCCCC" size="{{12}}"></mp-icon>
+      </view>
+    </view>
+
+    <!-- 其他设置项 -->
+    <view class="settings-item">
+      <view class="item-left">
+        <mp-icon icon="notification" color="#333333" size="{{24}}"></mp-icon>
+        <text>消息通知</text>
+      </view>
+      <switch checked="{{notifications}}" bindchange="toggleNotifications"></switch>
+    </view>
+
+    <view class="settings-item">
+      <view class="item-left">
+        <mp-icon icon="help" color="#333333" size="{{24}}"></mp-icon>
+        <text>帮助中心</text>
+      </view>
+      <view class="item-right">
+        <mp-icon icon="arrow" color="#CCCCCC" size="{{12}}"></mp-icon>
+      </view>
+    </view>
+
+    <view class="settings-item">
+      <view class="item-left">
+        <mp-icon icon="info" color="#333333" size="{{24}}"></mp-icon>
+        <text>关于</text>
+      </view>
+      <view class="item-right">
+        <text class="version">v1.0.0</text>
+        <mp-icon icon="arrow" color="#CCCCCC" size="{{12}}"></mp-icon>
+      </view>
+    </view>
+  </view>
+</view> 

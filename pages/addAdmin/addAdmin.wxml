@@ -1,0 +1,8 @@
+<view class="container">
+  <view class="title">添加管理员</view>
+  <view class="info">微信号：{{wechatId}}</view>
+  <view class="result" wx:if="{{result}}">
+    <text>结果：</text>
+    <text>{{result}}</text>
+  </view>
+</view> 

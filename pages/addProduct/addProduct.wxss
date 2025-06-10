@@ -1,0 +1,440 @@
+.container {
+  padding: 30rpx;
+  background: #f7f8fa;
+  min-height: 100vh;
+}
+
+.form-group {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+  animation: slideIn 0.5s ease;
+}
+
+.label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  height: 88rpx;
+  background: #f7f8fa;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+  border: 2rpx solid transparent;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-color: #07c160;
+  background: #fff;
+}
+
+.textarea {
+  width: 100%;
+  height: 240rpx;
+  background: #f7f8fa;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+  border: 2rpx solid transparent;
+  transition: all 0.3s ease;
+}
+
+.textarea:focus {
+  border-color: #07c160;
+  background: #fff;
+}
+
+.image-upload {
+  width: 100%;
+  height: 400rpx;
+  background: #f7f8fa;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2rpx dashed #ddd;
+  transition: all 0.3s ease;
+}
+
+.image-upload:active {
+  border-color: #07c160;
+  background: #f0fff4;
+}
+
+.image-upload image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12rpx;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #999;
+}
+
+.upload-placeholder .icon-camera {
+  font-size: 56rpx;
+  margin-bottom: 16rpx;
+  color: #07c160;
+}
+
+.variants {
+  margin-bottom: 24rpx;
+}
+
+.variant-item {
+  background: #f7f8fa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+  transition: all 0.3s ease;
+  border: 2rpx solid transparent;
+}
+
+.variant-item:active {
+  border-color: #07c160;
+  background: #fff;
+}
+
+/* 规格行布局 */
+.variant-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+/* 规格输入框组容器 */
+.variant-inputs-container {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  width: 100%;
+}
+
+/* 规格输入框组 */
+.variant-inputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+/* 规格输入框样式 */
+.variant-inputs .input {
+  height: 88rpx;
+  background: #fff;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+  text-align: left;
+  padding: 0 24rpx;
+}
+
+.variant-inputs .input:focus {
+  border-color: #07c160;
+  background: #f8fff8;
+}
+
+/* 颜色选择区域样式 */
+.colors {
+  width: 100%;
+}
+
+.color-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.color-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.color-item .input {
+  flex: 1;
+  background: #fff;
+  height: 88rpx;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+}
+
+.color-item .input:focus {
+  border-color: #07c160;
+  background: #f8fff8;
+}
+
+.color-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* 价格输入框特殊样式 */
+.price-input {
+  text-align: right;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 500;
+  padding-right: 30rpx !important;
+}
+
+/* 删除按钮容器 */
+.variant-actions {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10rpx;
+}
+
+/* 删除按钮样式 */
+.delete-btn {
+  background: #fff5f5;
+  color: #ff4d4f;
+  font-size: 26rpx;
+  padding: 12rpx 24rpx;
+  border-radius: 8rpx;
+  margin: 0;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  line-height: 1;
+  min-width: 100rpx;
+}
+
+.delete-btn:active {
+  background: #ff4d4f;
+  color: #fff;
+}
+
+/* 删除按钮文字 */
+.delete-btn-text {
+  margin: 0;
+  line-height: 1;
+}
+
+.add-variant-btn {
+  background: #f0fff4;
+  color: #07c160;
+  font-size: 28rpx;
+  margin: 12rpx 0 0;
+  width: 100%;
+  padding: 16rpx 0;
+  border-radius: 12rpx;
+  border: 2rpx dashed #07c160;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.add-variant-btn:active {
+  background: #07c160;
+  color: #fff;
+}
+
+.submit-btn {
+  background: #07c160;
+  color: #fff;
+  font-size: 32rpx;
+  margin: 20rpx auto;
+  padding: 20rpx 0;
+  width: 90%;
+  border-radius: 12rpx;
+  font-weight: 600;
+  box-shadow: 0 6rpx 12rpx rgba(7, 193, 96, 0.2);
+  transition: all 0.3s ease;
+  letter-spacing: 4rpx;
+  line-height: 1;
+  border: none;
+}
+
+.submit-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 4rpx 8rpx rgba(7, 193, 96, 0.15);
+  opacity: 0.9;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 自定义属性样式 */
+.custom-properties {
+  width: 100%;
+}
+
+.property-item {
+  background: #f7f8fa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.property-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.property-name {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.property-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.value-tag {
+  background: #fff;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+  border: 2rpx solid #eee;
+}
+
+.value-delete {
+  margin-left: 8rpx;
+  color: #999;
+  font-size: 24rpx;
+  padding: 4rpx;
+}
+
+.value-input {
+  background: #fff;
+  height: 64rpx;
+  border-radius: 8rpx;
+  padding: 0 16rpx;
+  font-size: 26rpx;
+  border: 2rpx solid #eee;
+  flex: 1;
+  min-width: 160rpx;
+}
+
+/* 弹窗样式 */
+.custom-property-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-content {
+  position: relative;
+  width: 600rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+.dialog-header {
+  padding: 24rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dialog-header text {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.dialog-close {
+  font-size: 40rpx;
+  color: #999;
+  padding: 10rpx;
+}
+
+.dialog-body {
+  padding: 24rpx;
+}
+
+.dialog-footer {
+  padding: 24rpx;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+  border-top: 2rpx solid #f5f5f5;
+}
+
+.dialog-btn {
+  min-width: 160rpx;
+  height: 72rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.dialog-btn.cancel {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.dialog-btn.confirm {
+  background: #07c160;
+  color: #fff;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50rpx);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+} 
