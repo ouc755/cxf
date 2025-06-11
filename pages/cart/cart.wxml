@@ -6,7 +6,7 @@
 
   <!-- 空购物车 -->
   <view class="empty-cart" wx:elif="{{!cartItems.length}}">
-    <image class="empty-cart-icon" src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/default/empty-cart.png" mode="aspectFit"></image>
+    <image class="empty-cart-icon" src="{{emptyCartIcon}}" mode="aspectFit"></image>
     <text class="empty-cart-text">购物车还是空的</text>
   </view>
 
@@ -16,7 +16,7 @@
       <!-- 选择框 -->
       <image 
         class="checkbox" 
-        src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/{{item.selected ? 'checkbox-selected.png' : 'checkbox-normal.png'}}"
+        src="{{item.selected ? checkboxSelectedIcon : checkboxNormalIcon}}"
         bindtap="toggleSelect"
         data-id="{{item._id}}"
       ></image>
@@ -42,7 +42,7 @@
       <!-- 删除按钮 -->
       <image 
         class="delete-btn" 
-        src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/delete.png"
+        src="{{deleteIcon}}"
         bindtap="removeItem"
         data-id="{{item._id}}"
       ></image>
@@ -54,7 +54,7 @@
     <view class="select-all" bindtap="toggleSelectAll">
       <image 
         class="checkbox" 
-        src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/{{isSelectAll ? 'checkbox-selected.png' : 'checkbox-normal.png'}}"
+        src="{{isSelectAll ? checkboxSelectedIcon : checkboxNormalIcon}}"
       ></image>
       <text>全选</text>
     </view>

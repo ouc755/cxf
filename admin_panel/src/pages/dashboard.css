@@ -1,0 +1,201 @@
+.dashboard-container {
+  display: flex;
+  height: 100vh; /* 使容器高度占满整个视口 */
+  background-color: #f4f7f6; /* 轻微的背景色 */
+}
+
+.dashboard-sidebar {
+  width: 200px;
+  background-color: #2c3e50; /* 深色背景 */
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+.dashboard-sidebar h2 {
+  color: #ecf0f1; /* 浅色标题 */
+  margin-bottom: 20px;
+  border-bottom: 1px solid #34495e; /* 分隔线 */
+  padding-bottom: 10px;
+}
+
+.dashboard-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard-sidebar li {
+  margin-bottom: 10px;
+}
+
+.dashboard-sidebar a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard-sidebar a:hover {
+  background-color: #34495e; /* 鼠标悬停效果 */
+}
+
+.dashboard-main-content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto; /* 内容超出时显示滚动条 */
+}
+
+.dashboard-main-content h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.dashboard-module {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 模块阴影 */
+}
+
+.dashboard-module h2 {
+  color: #555;
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee; /* 模块标题分隔线 */
+  padding-bottom: 10px;
+}
+
+.dashboard-module table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.dashboard-module th,
+.dashboard-module td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.dashboard-module th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.dashboard-module button {
+  margin-right: 10px;
+  padding: 8px 15px;
+  background-color: #3498db; /* 蓝色按钮 */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard-module button:hover {
+  background-color: #2980b9; /* 鼠标悬停效果 */
+}
+
+/* 概览数据模块样式 */
+.overview-data .overview-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 自动调整列宽 */
+  gap: 20px; /* 卡片之间的间距 */
+}
+
+.overview-data .card {
+  background-color: #e9ecef; /* 卡片背景色 */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* 卡片阴影 */
+  text-align: center; /* 文本居中 */
+}
+
+.overview-data .card h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.overview-data .card p {
+  margin-bottom: 0;
+  color: #007bff; /* 数据颜色 */
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+/* 快捷操作模块样式 */
+.quick-actions button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #28a745; /* 绿色按钮 */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quick-actions button:hover {
+  background-color: #218838; /* 鼠标悬停效果 */
+}
+
+/* 最近订单模块样式 */
+.recent-orders table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.recent-orders th,
+.recent-orders td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.recent-orders th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  color: #555;
+}
+
+.recent-orders tbody tr:nth-child(even) {
+  background-color: #f2f2f2; /* 斑马纹效果 */
+}
+
+.recent-orders tbody tr:hover {
+  background-color: #e9ecef; /* 鼠标悬停效果 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column; /* 小屏幕下垂直布局 */
+  }
+
+  .dashboard-sidebar {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 调整阴影 */
+  }
+
+  .dashboard-main-content {
+    padding: 10px;
+  }
+
+  .dashboard-module {
+    padding: 15px;
+  }
+
+  .dashboard-module button {
+    margin-bottom: 10px;
+  }
+}

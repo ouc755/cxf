@@ -9,6 +9,7 @@ Page({
     selectedColor: '',
     selectedPackaging: '',
     selectedGiftBag: '',
+    selectedCustomOptions: {},
     currentPrice: 0,
     swiperImageUrls: [],
     quantity: 1,
@@ -110,6 +111,61 @@ Page({
     this.setData({ selectedGiftBag: e.currentTarget.dataset.giftbag });
   },
 
+  selectCustomOption(e) {
+    const { propertyName, option } = e.currentTarget.dataset
+    this.setData({
+      [`selectedCustomOptions.${propertyName}`]: option
+    })
+  },
+
+  validateSelections() {
+    const { 
+      product, 
+      selectedStyle, 
+      selectedSize, 
+      selectedColor,
+      selectedCustomOptions 
+    } = this.data
+
+    if (product.specifications && product.specifications.length > 0 && !selectedStyle) {
+      wx.showToast({
+        title: '请选择规格',
+        icon: 'none'
+      })
+      return false
+    }
+
+    if (product.sizes && product.sizes.length > 0 && !selectedSize) {
+      wx.showToast({
+        title: '请选择尺寸',
+        icon: 'none'
+      })
+      return false
+    }
+
+    if (product.colors && product.colors.length > 0 && !selectedColor) {
+      wx.showToast({
+        title: '请选择颜色',
+        icon: 'none'
+      })
+      return false
+    }
+
+    if (product.customProperties) {
+      for (const prop of product.customProperties) {
+        if (prop.options && prop.options.length > 0 && !selectedCustomOptions[prop.name]) {
+          wx.showToast({
+            title: `请选择${prop.name}`,
+            icon: 'none'
+          })
+          return false
+        }
+      }
+    }
+
+    return true
+  },
+
   updatePrice: function() {
     const { product, selectedStyle, selectedSize } = this.data;
     
@@ -132,34 +188,44 @@ Page({
   },
 
   async addToCart() {
-    const { product, selectedStyle, selectedSize, selectedColor, currentPrice, quantity } = this.data;
+    const { 
+      product, 
+      selectedStyle, 
+      selectedSize, 
+      selectedColor, 
+      currentPrice, 
+      quantity,
+      selectedCustomOptions 
+    } = this.data
     
-    if (!checkSpecSelected(selectedStyle, selectedSize, selectedColor)) return;
+    if (!this.validateSelections()) return
 
     try {
       const productData = {
-        _id: product._id || product.id,
+        _id: product._id,
         name: product.name,
         imageUrl: product.imageUrl,
         price: currentPrice,
         specification: selectedStyle,
         size: selectedSize,
-        color: selectedColor
-      };
+        color: selectedColor,
+        customOptions: selectedCustomOptions,
+        quantity: quantity
+      }
 
-      await addToCart(productData, quantity);
+      await addToCart(productData)
 
       wx.showToast({
         title: '已加入购物车',
         icon: 'success',
         duration: 2000
-      });
+      })
     } catch (error) {
-      console.error('[addToCart] 添加到购物车失败：', error);
+      console.error('[addToCart] 添加到购物车失败：', error)
       wx.showToast({
         title: '添加失败，请重试',
         icon: 'none'
-      });
+      })
     }
   },
 

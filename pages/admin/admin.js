@@ -145,17 +145,23 @@ Page({
   async processImageUrls(data) {
     return await Promise.all(data.map(async (item) => {
       // 处理用户头像
-      if (item.userInfo && item.userInfo.avatarUrl && item.userInfo.avatarUrl.includes('cloud://')) {
+      if (item.userInfo && item.userInfo.avatarUrl) {
+        if (item.userInfo.avatarUrl.includes('cloud://')) {
         try {
           const { fileList } = await wx.cloud.getTempFileURL({
             fileList: [item.userInfo.avatarUrl]
           })
+            if (fileList && fileList[0] && fileList[0].tempFileURL) {
           item.userInfo.avatarUrl = fileList[0].tempFileURL
+            } else {
+              item.userInfo.avatarUrl = this.data.defaultAvatarUrl
+            }
         } catch (error) {
           console.error('获取用户头像临时链接失败：', error)
           item.userInfo.avatarUrl = this.data.defaultAvatarUrl
         }
-      } else if (!item.userInfo || !item.userInfo.avatarUrl) {
+        }
+      } else {
         item.userInfo = item.userInfo || {}
         item.userInfo.avatarUrl = this.data.defaultAvatarUrl
       }
@@ -168,12 +174,16 @@ Page({
               const { fileList } = await wx.cloud.getTempFileURL({
                 fileList: [product.imageUrl]
               })
+              if (fileList && fileList[0] && fileList[0].tempFileURL) {
               product.imageUrl = fileList[0].tempFileURL
+              } else {
+                product.imageUrl = this.data.defaultProductUrl
+              }
             } catch (error) {
               console.error('获取商品图片临时链接失败：', error)
               product.imageUrl = this.data.defaultProductUrl
             }
-          } else if (!product.imageUrl) {
+          } else if (!product.imageUrl || !product.imageUrl.trim()) {
             product.imageUrl = this.data.defaultProductUrl
           }
           return product
@@ -192,14 +202,16 @@ Page({
       const db = wx.cloud.database()
       const toys = db.collection('toys')
       
-      // 获取总数
+      // 获取总数（只统计有商品的购物车）
       const countResult = await toys.where({
-        type: 'cart'
+        type: 'cart',
+        'products.0': db.command.exists(true) // 确保products数组不为空
       }).count()
 
-      // 获取购物车列表
+      // 获取购物车列表（只获取有商品的购物车）
       const { data } = await toys.where({
-        type: 'cart'
+        type: 'cart',
+        'products.0': db.command.exists(true) // 确保products数组不为空
       })
       .skip((this.data.currentPage - 1) * this.data.pageSize)
       .limit(this.data.pageSize)
@@ -239,14 +251,29 @@ Page({
             const { fileList } = await wx.cloud.getTempFileURL({
               fileList: [fileID]
             })
-            // 更新图片链接为临时链接
+            if (fileList && fileList[0] && fileList[0].tempFileURL) {
             return {
               ...product,
               imageUrl: fileList[0].tempFileURL
+              }
+            } else {
+              console.error('获取临时链接失败，使用默认图片')
+              return {
+                ...product,
+                imageUrl: this.data.defaultProductUrl
+              }
             }
           } catch (err) {
             console.error('获取图片临时链接失败：', err)
-            return product
+            return {
+              ...product,
+              imageUrl: this.data.defaultProductUrl
+            }
+          }
+        } else if (!product.imageUrl || !product.imageUrl.trim()) {
+          return {
+            ...product,
+            imageUrl: this.data.defaultProductUrl
           }
         }
         return product
@@ -283,7 +310,7 @@ Page({
   // 跳转到添加商品页面
   navigateToAddProduct() {
     wx.navigateTo({
-      url: '/pages/admin/addProduct/addProduct'
+      url: '/pages/addProduct/addProduct'
     })
   },
 
@@ -291,7 +318,7 @@ Page({
   editProduct(e) {
     const productId = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/admin/addProduct/addProduct?id=${productId}`
+      url: `/pages/addProduct/addProduct?id=${productId}`
     })
   },
 

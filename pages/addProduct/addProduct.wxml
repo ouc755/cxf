@@ -83,27 +83,46 @@
     <!-- 自定义商品属性 -->
     <view class="form-group">
       <view class="label">自定义商品属性</view>
-      <view class="custom-properties">
-        <view class="property-item" wx:for="{{customProperties}}" wx:key="index">
-          <view class="property-header">
-            <text class="property-name">{{item.name}}</text>
-            <button class="delete-btn" data-index="{{index}}" bindtap="deleteCustomProperty">删除</button>
-          </view>
-          <view class="property-values">
-            <view class="value-tag" wx:for="{{item.values}}" wx:for-item="value" wx:for-index="valueIndex" wx:key="valueIndex">
-              {{value}}
-              <text class="value-delete" data-property-index="{{index}}" data-value-index="{{valueIndex}}" bindtap="deletePropertyValue">×</text>
+      <view wx:if="{{!showCustomProperties}}" class="add-custom-properties">
+        <button class="add-properties-btn" bindtap="showCustomPropertiesSection">添加自定义属性</button>
+      </view>
+      <view wx:if="{{showCustomProperties}}" class="custom-properties">
+        <view class="property-list">
+          <view class="property-item" wx:for="{{customProperties}}" wx:key="index">
+            <view class="property-header">
+              <input class="input property-name" 
+                    data-index="{{index}}" 
+                    value="{{item.name}}" 
+                    placeholder="输入属性名称" 
+                    bindchange="handleCustomPropertyNameChange"/>
+              <view class="property-actions">
+                <button class="delete-btn" data-index="{{index}}" bindtap="deleteCustomProperty">删除属性</button>
+              </view>
             </view>
-            <input class="value-input" 
-                  data-index="{{index}}" 
-                  placeholder="添加新值" 
-                  bindconfirm="addPropertyValue"
-                  value="{{item.currentValue}}"
-                  bindblur="clearPropertyInput"/>
+            <view class="property-options">
+              <view class="option-item" wx:for="{{item.options}}" wx:for-item="option" wx:for-index="optionIndex" wx:key="optionIndex">
+                <input class="input option-input" 
+                      data-property-index="{{index}}" 
+                      data-option-index="{{optionIndex}}" 
+                      value="{{option}}" 
+                      placeholder="输入选项值" 
+                      bindchange="handleCustomPropertyOptionChange"/>
+                <view class="option-actions">
+                  <button class="delete-btn" 
+                          data-property-index="{{index}}" 
+                          data-option-index="{{optionIndex}}" 
+                          bindtap="deletePropertyOption">删除</button>
+                </view>
+              </view>
+              <button class="add-option-btn" data-index="{{index}}" bindtap="addPropertyOption">添加选项</button>
+            </view>
           </view>
         </view>
+        <view class="custom-properties-actions">
+          <button class="add-variant-btn" bindtap="addCustomProperty">添加更多属性</button>
+          <button class="cancel-btn" bindtap="hideCustomPropertiesSection">取消自定义属性</button>
+        </view>
       </view>
-      <button class="add-variant-btn" bindtap="showCustomPropertyDialog">添加自定义属性</button>
     </view>
 
     <!-- 自定义属性弹窗 -->

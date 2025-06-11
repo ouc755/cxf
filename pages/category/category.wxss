@@ -109,10 +109,6 @@
   border: none;
 }
 
-.buy-btn-login {
-  background: #ff9500;
-}
-
 .buy-btn:active {
   opacity: 0.9;
 }

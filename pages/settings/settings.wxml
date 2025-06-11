@@ -17,10 +17,10 @@
         <mp-icon icon="notification" color="#333333" size="{{24}}"></mp-icon>
         <text>消息通知</text>
       </view>
-      <switch checked="{{notifications}}" bindchange="toggleNotifications"></switch>
+      <switch checked="{{notifications}}" bindchange="toggleNotifications" color="#07c160"></switch>
     </view>
 
-    <view class="settings-item">
+    <view class="settings-item" bindtap="showFeatureNotAvailable">
       <view class="item-left">
         <mp-icon icon="help" color="#333333" size="{{24}}"></mp-icon>
         <text>帮助中心</text>
@@ -36,7 +36,7 @@
         <text>关于</text>
       </view>
       <view class="item-right">
-        <text class="version">v1.0.0</text>
+        <text class="version">v0.0.3</text>
         <mp-icon icon="arrow" color="#CCCCCC" size="{{12}}"></mp-icon>
       </view>
     </view>

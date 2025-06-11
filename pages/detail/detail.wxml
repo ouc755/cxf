@@ -19,22 +19,27 @@
       <view class="product-name">{{product.name}}</view>
       <view class="product-price">
         <text class="price-label">价格：</text>
-        <text class="price-value">￥{{product.prices[0].price}}</text>
+        <text class="price-value">￥{{displayPrice}}</text>
       </view>
       
       <!-- 商品规格 -->
       <view class="product-specs">
-        <view class="spec-item" wx:if="{{product.colors}}">
+        <view class="spec-item" wx:if="{{product.colors && product.colors.length > 0}}">
           <text class="spec-label">颜色：</text>
           <text>{{product.colors.join('、')}}</text>
         </view>
-        <view class="spec-item" wx:if="{{product.styles}}">
+        <view class="spec-item" wx:if="{{product.styles && product.styles.length > 0}}">
           <text class="spec-label">款式：</text>
           <text>{{product.styles.join('、')}}</text>
         </view>
-        <view class="spec-item" wx:if="{{product.sizes}}">
+        <view class="spec-item" wx:if="{{product.sizes && product.sizes.length > 0}}">
           <text class="spec-label">尺寸：</text>
           <text>{{product.sizes.join('、')}}</text>
+        </view>
+        <!-- 自定义属性 -->
+        <view class="spec-item" wx:for="{{product.customProperties}}" wx:key="name" wx:if="{{item.options && item.options.length > 0}}">
+          <text class="spec-label">{{item.name}}：</text>
+          <text>{{item.options.join('、')}}</text>
         </view>
       </view>
 

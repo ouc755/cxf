@@ -8,15 +8,43 @@ Page({
     totalPrice: 0,
     isSelectAll: false,
     selectedCount: 0,
-    cartId: null
+    cartId: null,
+    emptyCartIcon: '',
+    checkboxSelectedIcon: '',
+    checkboxNormalIcon: '',
+    deleteIcon: ''
   },
 
   onLoad() {
+    this.initIcons()
     this.checkLoginStatus()
   },
 
   onShow() {
     this.checkLoginStatus()
+  },
+
+  // 初始化图标
+  async initIcons() {
+    try {
+      const { fileList } = await wx.cloud.getTempFileURL({
+        fileList: [
+          'cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/default/empty-cart.png',
+          'cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/checkbox-selected.png',
+          'cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/checkbox-normal.png',
+          'cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/delete.png'
+        ]
+      })
+
+      this.setData({
+        emptyCartIcon: fileList[0].tempFileURL,
+        checkboxSelectedIcon: fileList[1].tempFileURL,
+        checkboxNormalIcon: fileList[2].tempFileURL,
+        deleteIcon: fileList[3].tempFileURL
+      })
+    } catch (error) {
+      console.error('获取图标临时链接失败：', error)
+    }
   },
 
   // 检查登录状态

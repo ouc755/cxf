@@ -79,6 +79,6 @@
 
   <!-- 版本信息 -->
   <view class="version-info">
-    <text>版本 1.0.0</text>
+    <text>版本 0.0.3</text>
   </view>
 </view> 

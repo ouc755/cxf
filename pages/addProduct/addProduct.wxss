@@ -209,8 +209,8 @@
 .delete-btn {
   background: #fff5f5;
   color: #ff4d4f;
-  font-size: 26rpx;
-  padding: 12rpx 24rpx;
+  font-size: 24rpx;
+  padding: 8rpx 24rpx;
   border-radius: 8rpx;
   margin: 0;
   border: none;
@@ -219,7 +219,7 @@
   justify-content: center;
   transition: all 0.3s ease;
   line-height: 1;
-  min-width: 100rpx;
+  min-width: 80rpx;
 }
 
 .delete-btn:active {
@@ -285,63 +285,56 @@
 }
 
 /* 自定义属性样式 */
-.custom-properties {
-  width: 100%;
-}
-
-.property-item {
-  background: #f7f8fa;
-  border-radius: 12rpx;
-  padding: 20rpx;
-  margin-bottom: 16rpx;
-}
-
 .property-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 16rpx;
   margin-bottom: 16rpx;
 }
 
 .property-name {
-  font-size: 28rpx;
-  color: #333;
-  font-weight: 500;
-}
-
-.property-values {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12rpx;
-}
-
-.value-tag {
-  background: #fff;
-  padding: 8rpx 16rpx;
-  border-radius: 8rpx;
-  font-size: 26rpx;
-  color: #333;
-  display: inline-flex;
-  align-items: center;
-  border: 2rpx solid #eee;
-}
-
-.value-delete {
-  margin-left: 8rpx;
-  color: #999;
-  font-size: 24rpx;
-  padding: 4rpx;
-}
-
-.value-input {
-  background: #fff;
-  height: 64rpx;
-  border-radius: 8rpx;
-  padding: 0 16rpx;
-  font-size: 26rpx;
-  border: 2rpx solid #eee;
   flex: 1;
-  min-width: 160rpx;
+  background: #fff;
+  height: 88rpx;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+}
+
+.property-options {
+  margin-left: 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.option-input {
+  flex: 1;
+  background: #fff;
+  height: 88rpx;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+}
+
+.add-option-btn {
+  background: #f0fff4;
+  color: #07c160;
+  font-size: 24rpx;
+  margin: 8rpx 0;
+  padding: 12rpx 24rpx;
+  border-radius: 8rpx;
+  border: 2rpx dashed #07c160;
+  width: auto;
+  display: inline-block;
+}
+
+.add-option-btn:active {
+  background: #07c160;
+  color: #fff;
 }
 
 /* 弹窗样式 */
@@ -437,4 +430,46 @@
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.add-custom-properties {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx 0;
+}
+
+.add-properties-btn {
+  background: #f0fff4;
+  color: #07c160;
+  font-size: 28rpx;
+  padding: 20rpx 40rpx;
+  border-radius: 12rpx;
+  border: 2rpx dashed #07c160;
+  width: 100%;
+}
+
+.add-properties-btn:active {
+  background: #07c160;
+  color: #fff;
+}
+
+.custom-properties-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.cancel-btn {
+  background: #fff5f5;
+  color: #ff4d4f;
+  font-size: 28rpx;
+  padding: 20rpx 40rpx;
+  border-radius: 12rpx;
+  border: 2rpx solid #ff4d4f;
+  flex: 1;
+}
+
+.cancel-btn:active {
+  background: #ff4d4f;
+  color: #fff;
 } 

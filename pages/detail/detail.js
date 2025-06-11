@@ -3,7 +3,8 @@ const app = getApp()
 Page({
   data: {
     product: null,
-    isLoading: true
+    isLoading: true,
+    displayPrice: '0.00'
   },
 
   onLoad: async function(options) {
@@ -39,8 +40,43 @@ Page({
       const result = await db.collection('products').doc(id).get()
       
       if (result.data) {
+        // 处理价格显示
+        let displayPrice = '0.00'
+        if (result.data.prices && Array.isArray(result.data.prices) && result.data.prices.length > 0) {
+          const firstPriceEntry = result.data.prices.find(p => typeof p.price === 'number')
+          if (firstPriceEntry) {
+            displayPrice = firstPriceEntry.price.toFixed(2)
+          }
+        }
+
+        // 处理图片临时链接
+        let imageUrl = result.data.imageUrl
+        if (imageUrl && imageUrl.includes('cloud://')) {
+          try {
+            const { fileList } = await wx.cloud.getTempFileURL({
+              fileList: [imageUrl]
+            })
+            if (fileList && fileList[0] && fileList[0].tempFileURL) {
+              imageUrl = fileList[0].tempFileURL
+            }
+          } catch (err) {
+            console.error('获取图片临时链接失败：', err)
+          }
+        }
+
+        // 确保所有数组字段都存在
+        const productData = {
+          ...result.data,
+          imageUrl,
+          colors: result.data.colors || [],
+          styles: result.data.styles || [],
+          sizes: result.data.sizes || [],
+          customProperties: result.data.customProperties || []
+        }
+
         this.setData({
-          product: result.data,
+          product: productData,
+          displayPrice,
           isLoading: false
         })
       } else {
@@ -64,50 +100,47 @@ Page({
     }
   },
 
-  // 立即购买
-  handleBuyNow() {
-    const token = wx.getStorageSync('token');
-    if (!token || !app.globalData.isLoggedIn) {
-      wx.navigateTo({
-        url: '/pages/login/login'
-      })
-      return
-    }
-    // 处理购买逻辑...
-    const { product } = this.data
-    if (product) {
-      wx.navigateTo({
-        url: `/pages/order/confirm/confirm?productId=${product._id}`
-      })
+  // 加入购物车
+  async handleAddToCart() {
+    if (!this.data.product) return;
+    
+    try {
+      wx.showLoading({
+        title: '添加中...',
+        mask: true
+      });
+
+      const db = wx.cloud.database();
+      await db.collection('carts').add({
+        data: {
+          productId: this.data.product._id,
+          quantity: 1,
+          selected: true,
+          createTime: db.serverDate()
+        }
+      });
+
+      wx.showToast({
+        title: '已加入购物车',
+        icon: 'success'
+      });
+    } catch (error) {
+      console.error('Add to cart failed:', error);
+      wx.showToast({
+        title: '添加失败',
+        icon: 'error'
+      });
+    } finally {
+      wx.hideLoading();
     }
   },
 
-  // 加入购物车
-  handleAddToCart() {
-    const token = wx.getStorageSync('token'); // token可选
+  // 立即购买
+  handleBuyNow() {
+    if (!this.data.product) return;
     
-    // 处理加入购物车逻辑
-    const { product } = this.data
-    if (product) {
-      wx.cloud.callFunction({
-        name: 'addToCart',
-        data: {
-          productId: product._id,
-          quantity: 1,
-          token // 传递token到后端，可选
-        }
-      }).then(() => {
-        wx.showToast({
-          title: '已加入购物车',
-          icon: 'success'
-        })
-      }).catch(error => {
-        console.error('Add to cart failed:', error)
-        wx.showToast({
-          title: '添加失败',
-          icon: 'error'
-        })
-      })
-    }
+    wx.navigateTo({
+      url: `/pages/order/confirm/confirm?productId=${this.data.product._id}`
+    });
   }
 }) 

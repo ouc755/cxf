@@ -1,6 +1,6 @@
 {
   "name": "toy-shop-miniprogram",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "description": "玩具商城小程序",
   "main": "app.js",
   "scripts": {

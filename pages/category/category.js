@@ -7,9 +7,7 @@ Page({
     products: [],
     loading: true,
     loadingImageUrl: 'cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/loading.gif',
-    emptyImageUrl: 'cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/empty.png',
-    isLoggedIn: false,
-    userInfo: null
+    emptyImageUrl: 'cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/icons/empty.png'
   },
 
   onLoad: function(options) {
@@ -17,9 +15,7 @@ Page({
     
     this.setData({
       categoryId: id,
-      categoryName: name || '分类商品',
-      isLoggedIn: auth.checkLogin(),
-      userInfo: auth.getUserInfo()
+      categoryName: name || '分类商品'
     });
 
     // 设置导航栏标题
@@ -41,62 +37,6 @@ Page({
       } else {
         // 如果没有传递数据，则从数据库加载
         this.loadCategoryProducts();
-      }
-    });
-
-    this.updateLoginStatus();
-  },
-
-  // 检查并更新登录状态
-  updateLoginStatus() {
-    this.setData({
-      isLoggedIn: auth.checkLogin(),
-      userInfo: auth.getUserInfo()
-    });
-  },
-
-  // 用户点击登录按钮
-  onGetUserProfile() {
-    wx.getUserProfile({
-      desc: '用于完善会员资料',
-      success: (res) => {
-        // 设置本地状态，直接存真实信息
-        this.setData({
-          isLoggedIn: true,
-          userInfo: res.userInfo
-        });
-        wx.setStorageSync('user_info', res.userInfo);
-
-        // 同步到云数据库，userInfo字段为真实信息
-        wx.cloud.callFunction({
-          name: 'login',
-          success: cloudRes => {
-            const openid = cloudRes.result.openid;
-            const db = wx.cloud.database();
-            db.collection('users').doc(openid).set({
-              data: {
-                _id: openid,
-                userInfo: res.userInfo, // 真实信息
-                updateTime: new Date()
-              },
-              success: () => {
-                wx.showToast({ title: '登录成功', icon: 'success' });
-              },
-              fail: err => {
-                // 已存在则更新
-                db.collection('users').doc(openid).update({
-                  data: {
-                    userInfo: res.userInfo,
-                    updateTime: new Date()
-                  }
-                });
-              }
-            });
-          }
-        });
-      },
-      fail: (err) => {
-        wx.showToast({ title: '用户拒绝授权', icon: 'none' });
       }
     });
   },
@@ -194,56 +134,8 @@ Page({
   },
 
   // 点击立即购买
-  onBuyNow: async function(e) {
+  onBuyNow: function(e) {
     const productId = e.currentTarget.dataset.id;
-    
-    // 检查是否已登录
-    if (!this.data.isLoggedIn) {
-      try {
-        // 尝试登录
-        await auth.login();
-        
-        // 询问是否需要获取用户信息
-        wx.showModal({
-          title: '完善信息',
-          content: '是否授权获取您的头像和昵称？',
-          success: async (res) => {
-            if (res.confirm) {
-              try {
-                const userInfo = await auth.getUserProfile();
-                this.setData({
-                  isLoggedIn: true,
-                  userInfo: userInfo
-                });
-                // 继续购买流程
-                this.proceedToBuy(productId);
-              } catch (err) {
-                // 用户拒绝授权个人信息，但已经登录，仍可继续购买
-                this.setData({ isLoggedIn: true });
-                this.proceedToBuy(productId);
-              }
-            } else {
-              // 用户不想授权个人信息，但已经登录，仍可继续购买
-              this.setData({ isLoggedIn: true });
-              this.proceedToBuy(productId);
-            }
-          }
-        });
-      } catch (err) {
-        wx.showToast({
-          title: '登录失败，请重试',
-          icon: 'none'
-        });
-        return;
-      }
-    } else {
-      // 已登录，直接继续购买流程
-      this.proceedToBuy(productId);
-    }
-  },
-
-  // 继续购买流程
-  proceedToBuy: function(productId) {
     wx.navigateTo({
       url: `/pages/order/create?productId=${productId}`
     });

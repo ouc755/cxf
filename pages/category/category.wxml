@@ -1,13 +1,4 @@
 <view class="container">
-  <!-- 用户信息栏 -->
-  <view class="user-bar" wx:if="{{isLoggedIn && userInfo.userInfo}}">
-    <image class="user-avatar" src="{{userInfo.userInfo.avatarUrl}}" mode="aspectFill"></image>
-    <text class="user-nickname">{{userInfo.userInfo.nickName}}</text>
-  </view>
-  <view wx:else>
-    <button bindtap="onGetUserProfile">登录</button>
-  </view>
-
   <!-- 加载中 -->
   <view class="loading" wx:if="{{loading}}">
     <view class="loading-spinner"></view>

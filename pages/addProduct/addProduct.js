@@ -14,6 +14,7 @@ Page({
       price: ''
     }],
     customProperties: [],
+    showCustomProperties: false,
     showPropertyDialog: false,
     newPropertyName: '',
     numericId: ''
@@ -42,17 +43,18 @@ Page({
 
       this.setData({
         product: {
-          name: data.name,
-          description: data.description
+          name: data.name || '',
+          description: data.description || ''
         },
-        imageUrl: data.imageUrl,
-        colors: data.colors || [''],
-        variants: data.variants || [{
+        imageUrl: data.imageUrl || '',
+        colors: data.colors && data.colors.length ? data.colors : [''],
+        variants: data.variants && data.variants.length ? data.variants : [{
           specification: '',
           size: '',
           price: ''
         }],
         customProperties: data.customProperties || [],
+        showCustomProperties: data.customProperties && data.customProperties.length > 0,
         productId: id,
         numericId: data.id
       })
@@ -161,6 +163,25 @@ Page({
     this.setData({ colors })
   },
 
+  // 显示自定义属性区域
+  showCustomPropertiesSection() {
+    this.setData({
+      showCustomProperties: true,
+      customProperties: [{
+        name: '',
+        options: ['']
+      }]
+    })
+  },
+
+  // 隐藏自定义属性区域
+  hideCustomPropertiesSection() {
+    this.setData({
+      showCustomProperties: false,
+      customProperties: []
+    })
+  },
+
   // 显示自定义属性弹窗
   showCustomPropertyDialog() {
     this.setData({
@@ -177,6 +198,65 @@ Page({
     })
   },
 
+  // 处理自定义属性名称变化
+  handleCustomPropertyNameChange(e) {
+    const { index } = e.currentTarget.dataset
+    const { value } = e.detail
+    const customProperties = [...this.data.customProperties]
+    customProperties[index].name = value
+    this.setData({ customProperties })
+  },
+
+  // 处理自定义属性选项变化
+  handleCustomPropertyOptionChange(e) {
+    const { propertyIndex, optionIndex } = e.currentTarget.dataset
+    const { value } = e.detail
+    const customProperties = [...this.data.customProperties]
+    customProperties[propertyIndex].options[optionIndex] = value
+    this.setData({ customProperties })
+  },
+
+  // 添加自定义属性
+  addCustomProperty() {
+    const customProperties = [...this.data.customProperties, {
+      name: '',
+      options: ['']
+    }]
+    this.setData({ customProperties })
+  },
+
+  // 删除自定义属性
+  deleteCustomProperty(e) {
+    const { index } = e.currentTarget.dataset
+    const customProperties = this.data.customProperties.filter((_, i) => i !== index)
+    if (customProperties.length === 0) {
+      customProperties.push({
+        name: '',
+        options: ['']
+      })
+    }
+    this.setData({ customProperties })
+  },
+
+  // 添加属性选项
+  addPropertyOption(e) {
+    const { index } = e.currentTarget.dataset
+    const customProperties = [...this.data.customProperties]
+    customProperties[index].options.push('')
+    this.setData({ customProperties })
+  },
+
+  // 删除属性选项
+  deletePropertyOption(e) {
+    const { propertyIndex, optionIndex } = e.currentTarget.dataset
+    const customProperties = [...this.data.customProperties]
+    customProperties[propertyIndex].options = customProperties[propertyIndex].options.filter((_, i) => i !== optionIndex)
+    if (customProperties[propertyIndex].options.length === 0) {
+      customProperties[propertyIndex].options.push('')
+    }
+    this.setData({ customProperties })
+  },
+
   // 处理新属性名称输入
   handleNewPropertyNameInput(e) {
     this.setData({
@@ -184,186 +264,8 @@ Page({
     })
   },
 
-  // 添加自定义属性
-  addCustomProperty() {
-    const { newPropertyName, customProperties } = this.data
-    if (!newPropertyName.trim()) {
-      wx.showToast({
-        title: '请输入属性名称',
-        icon: 'none'
-      })
-      return
-    }
-
-    // 检查属性名是否重复
-    if (customProperties.some(p => p.name === newPropertyName.trim())) {
-      wx.showToast({
-        title: '属性名称已存在',
-        icon: 'none'
-      })
-      return
-    }
-
-    const updatedProperties = [...customProperties, {
-      name: newPropertyName.trim(),
-      values: [],
-      currentValue: ''
-    }]
-
-    this.setData({
-      customProperties: updatedProperties,
-      showPropertyDialog: false,
-      newPropertyName: ''
-    })
-  },
-
-  // 删除自定义属性
-  deleteCustomProperty(e) {
-    const { index } = e.currentTarget.dataset
-    const customProperties = this.data.customProperties.filter((_, i) => i !== index)
-    this.setData({ customProperties })
-  },
-
-  // 添加属性值
-  addPropertyValue(e) {
-    const { index } = e.currentTarget.dataset
-    const { value } = e.detail
-    const { customProperties } = this.data
-
-    if (!value.trim()) return
-
-    // 检查值是否重复
-    if (customProperties[index].values.includes(value.trim())) {
-      wx.showToast({
-        title: '该值已存在',
-        icon: 'none'
-      })
-      return
-    }
-
-    const updatedProperties = [...customProperties]
-    updatedProperties[index].values.push(value.trim())
-    updatedProperties[index].currentValue = ''
-
-    this.setData({
-      customProperties: updatedProperties
-    })
-  },
-
-  // 删除属性值
-  deletePropertyValue(e) {
-    const { propertyIndex, valueIndex } = e.currentTarget.dataset
-    const customProperties = [...this.data.customProperties]
-    customProperties[propertyIndex].values.splice(valueIndex, 1)
-    this.setData({ customProperties })
-  },
-
-  // 清空属性值输入框
-  clearPropertyInput(e) {
-    const { index } = e.currentTarget.dataset
-    const customProperties = [...this.data.customProperties]
-    customProperties[index].currentValue = ''
-    this.setData({ customProperties })
-  },
-
-  // 提交表单
-  async handleSubmit(e) {
-    try {
-      const formData = e.detail.value
-      
-      // 验证表单
-      if (!this.validateForm(formData)) {
-        return
-      }
-
-      wx.showLoading({
-        title: '保存中...',
-        mask: true
-      })
-
-      const db = wx.cloud.database()
-      const validVariants = this.data.variants.filter(v => v.specification && v.size && v.price)
-      
-      // 从价格组合中提取所有不重复的规格和尺寸
-      const specifications = [...new Set(validVariants.map(v => v.specification))]
-      const sizes = [...new Set(validVariants.map(v => v.size))]
-      
-      // 构建价格数组
-      const prices = validVariants.map(v => ({
-        combination: `${v.specification}+${v.size}`,
-        price: Number(v.price)
-      }))
-
-      // 确保规格和尺寸数组存在且不为空
-      if (!specifications.length || !sizes.length) {
-        wx.showToast({
-          title: '请至少添加一个规格和尺寸',
-          icon: 'none'
-        })
-        return
-      }
-
-      const productData = {
-        name: formData.name,
-        description: formData.description,
-        imageUrl: this.data.imageUrl,
-        colors: this.data.colors.filter(color => color.trim()),
-        variants: validVariants,
-        specifications,  // 添加规格数组
-        sizes,          // 添加尺寸数组
-        prices,         // 添加价格数组
-        styles: specifications,  // 添加styles字段，与specifications保持一致
-        customProperties: this.data.customProperties,
-        updateTime: db.serverDate()
-      }
-
-      if (this.data.isEdit) {
-        await db.collection('products').doc(this.data.productId).update({
-          data: {
-            ...productData,
-            id: this.data.numericId
-          }
-        })
-      } else {
-        // 获取当前最大ID
-        const { data: existingProducts } = await db.collection('products')
-          .orderBy('id', 'desc')
-          .limit(1)
-          .get()
-        
-        const nextId = existingProducts.length > 0 ? existingProducts[0].id + 1 : 1
-
-        await db.collection('products').add({
-          data: {
-            ...productData,
-            id: nextId,
-            createTime: db.serverDate()
-          }
-        })
-      }
-
-      wx.showToast({
-        title: '保存成功',
-        icon: 'success'
-      })
-
-      // 返回上一页
-      setTimeout(() => {
-        wx.navigateBack()
-      }, 1500)
-    } catch (error) {
-      console.error('保存商品失败：', error)
-      wx.showToast({
-        title: '保存失败',
-        icon: 'none'
-      })
-    } finally {
-      wx.hideLoading()
-    }
-  },
-
   // 验证表单
-  validateForm(formData) {
+  validateForm() {
     if (!this.data.imageUrl) {
       wx.showToast({
         title: '请上传商品图片',
@@ -372,7 +274,7 @@ Page({
       return false
     }
 
-    if (!formData.name) {
+    if (!this.data.product.name.trim()) {
       wx.showToast({
         title: '请输入商品名称',
         icon: 'none'
@@ -380,7 +282,12 @@ Page({
       return false
     }
 
-    const validVariants = this.data.variants.filter(v => v.specification && v.size && v.price)
+    const validVariants = this.data.variants.filter(v => 
+      v.specification.trim() && 
+      v.size.trim() && 
+      v.price !== '' && 
+      !isNaN(Number(v.price))
+    )
     if (validVariants.length === 0) {
       wx.showToast({
         title: '请至少添加一个完整的商品规格',
@@ -389,6 +296,125 @@ Page({
       return false
     }
 
+    // 验证自定义属性
+    const validProperties = this.data.showCustomProperties ? 
+      this.data.customProperties.filter(prop => 
+        prop.name.trim() && prop.options.some(opt => opt.trim())
+      ).map(prop => ({
+        name: prop.name.trim(),
+        options: prop.options.filter(opt => opt.trim())
+      })) : []
+    const invalidProperties = this.data.customProperties.filter(prop => 
+      prop.name.trim() && !prop.options.some(opt => opt.trim())
+    )
+    if (invalidProperties.length > 0) {
+      wx.showToast({
+        title: '请为所有属性添加至少一个选项',
+        icon: 'none'
+      })
+      return false
+    }
+
     return true
+  },
+
+  // 提交表单
+  async handleSubmit(e) {
+    try {
+      // 从表单数据中获取商品名称和描述
+      const formData = e.detail.value;
+      this.setData({
+        product: {
+          name: formData.name,
+          description: formData.description
+        }
+      });
+
+      if (!this.validateForm()) {
+        return;
+      }
+
+      wx.showLoading({
+        title: '保存中...',
+        mask: true
+      });
+
+      const validVariants = this.data.variants.filter(v => 
+        v.specification.trim() && 
+        v.size.trim() && 
+        v.price !== '' && 
+        !isNaN(Number(v.price))
+      );
+
+      const specifications = [...new Set(validVariants.map(v => v.specification.trim()))];
+      const sizes = [...new Set(validVariants.map(v => v.size.trim()))];
+
+      const prices = validVariants.map(v => ({
+        combination: `${v.specification.trim()}+${v.size.trim()}`,
+        price: Number(v.price)
+      }));
+
+      const validProperties = this.data.showCustomProperties ? 
+        this.data.customProperties.filter(prop => 
+          prop.name.trim() && prop.options.some(opt => opt.trim())
+        ).map(prop => ({
+          name: prop.name.trim(),
+          options: prop.options.filter(opt => opt.trim())
+        })) : [];
+
+      const productData = {
+        name: formData.name.trim(),
+        description: formData.description.trim(),
+        imageUrl: this.data.imageUrl,
+        colors: this.data.colors.filter(color => color.trim()),
+        specifications,
+        sizes,
+        styles: specifications,
+        prices,
+        variants: validVariants.map(v => ({
+          specification: v.specification.trim(),
+          size: v.size.trim(),
+          price: Number(v.price)
+        })),
+        customProperties: validProperties
+      };
+
+      const db = wx.cloud.database();
+
+      if (this.data.isEdit) {
+        await db.collection('products').doc(this.data.productId).update({
+          data: {
+            ...productData,
+            updateTime: db.serverDate()
+          }
+        });
+      } else {
+        await db.collection('products').add({
+          data: {
+            ...productData,
+            createTime: db.serverDate(),
+            updateTime: db.serverDate()
+          }
+        });
+      }
+
+      wx.showToast({
+        title: '保存成功',
+        icon: 'success'
+      });
+
+      setTimeout(() => {
+        wx.navigateBack();
+      }, 1500);
+
+    } catch (error) {
+      console.error('保存商品失败：', error);
+      wx.showToast({
+        title: '保存失败',
+        icon: 'none'
+      });
+    } finally {
+      wx.hideLoading();
+    }
   }
 }) 

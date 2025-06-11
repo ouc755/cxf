@@ -86,6 +86,26 @@
         </view>
       </view>
 
+      <!-- 自定义属性选择 -->
+      <view class="spec-item" 
+            wx:for="{{product.customProperties}}" 
+            wx:key="name" 
+            wx:if="{{item.options && item.options.length > 0}}">
+        <view class="spec-title">{{item.name}}</view>
+        <view class="spec-options">
+          <view 
+            wx:for="{{item.options}}" 
+            wx:for-item="option"
+            wx:key="*this"
+            class="spec-option {{selectedCustomOptions[item.name] === option ? 'selected' : ''}}"
+            bindtap="selectCustomOption"
+            data-property-name="{{item.name}}"
+            data-option="{{option}}">
+            {{option}}
+          </view>
+        </view>
+      </view>
+
       <!-- 包装选择 -->
       <view class="spec-item" wx:if="{{product.packaging && product.packaging.length > 0 && !(product.packaging.length === 1 && product.packaging[0] === '无')}}">
         <view class="spec-title">包装</view>
