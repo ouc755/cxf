@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  env: 'cloud1-2g5ar9yr97b49f2f'
+  env: cloud.DYNAMIC_CURRENT_ENV
 })
 
 const db = cloud.database()
@@ -13,9 +13,8 @@ const usersCollection = db.collection('users')
 exports.main = async (event, context) => {
   const { token } = event
   const wxContext = cloud.getWXContext()
-  
-  console.log('开始检查token:', token)
-  console.log('当前用户OPENID:', wxContext.OPENID)
+  console.log('云函数收到token:', token)
+  console.log('云函数收到OPENID:', wxContext.OPENID)
   
   if (!token) {
     console.log('未提供token')
@@ -84,13 +83,16 @@ exports.main = async (event, context) => {
       const userData = {
         _openid: wxContext.OPENID,
         createTime: db.serverDate(),
-        updateTime: db.serverDate()
+        updateTime: db.serverDate(),
+        nickName: '', // 确保新用户也有这些字段
+        avatarUrl: '' // 确保新用户也有这些字段
       }
       
       const addResult = await usersCollection.add({
         data: userData
       })
       
+      console.log('新用户创建成功，返回userInfo:', { ...userData, _id: addResult._id })
       return {
         success: true,
         userInfo: {
@@ -100,7 +102,7 @@ exports.main = async (event, context) => {
       }
     }
     
-    console.log('返回用户信息')
+    console.log('已找到用户信息，返回userInfo:', userResult.data[0])
     return {
       success: true,
       userInfo: userResult.data[0]

@@ -120,15 +120,15 @@ Page({
         }
       });
 
-      wx.showToast({
-        title: '已加入购物车',
-        icon: 'success'
+        wx.showToast({
+          title: '已加入购物车',
+          icon: 'success'
       });
     } catch (error) {
       console.error('Add to cart failed:', error);
-      wx.showToast({
-        title: '添加失败',
-        icon: 'error'
+        wx.showToast({
+          title: '添加失败',
+          icon: 'error'
       });
     } finally {
       wx.hideLoading();

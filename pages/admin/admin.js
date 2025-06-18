@@ -146,39 +146,30 @@ Page({
     return await Promise.all(data.map(async (item) => {
       // 处理用户头像
       if (item.userInfo && item.userInfo.avatarUrl) {
-        if (item.userInfo.avatarUrl.includes('cloud://')) {
-        try {
-          const { fileList } = await wx.cloud.getTempFileURL({
-            fileList: [item.userInfo.avatarUrl]
-          })
-            if (fileList && fileList[0] && fileList[0].tempFileURL) {
-          item.userInfo.avatarUrl = fileList[0].tempFileURL
-            } else {
-              item.userInfo.avatarUrl = this.data.defaultAvatarUrl
-            }
-        } catch (error) {
-          console.error('获取用户头像临时链接失败：', error)
-          item.userInfo.avatarUrl = this.data.defaultAvatarUrl
-        }
+        if (item.userInfo.avatarUrl.startsWith('cloud://')) {
+          try {
+            const { fileList } = await wx.cloud.getTempFileURL({
+              fileList: [item.userInfo.avatarUrl]
+            })
+            item.userInfo.avatarUrl = fileList[0]?.tempFileURL || this.data.defaultAvatarUrl
+          } catch (error) {
+            console.error('获取用户头像临时链接失败：', error)
+            item.userInfo.avatarUrl = this.data.defaultAvatarUrl
+          }
         }
       } else {
         item.userInfo = item.userInfo || {}
         item.userInfo.avatarUrl = this.data.defaultAvatarUrl
       }
-
       // 处理商品图片
       if (item.products) {
         item.products = await Promise.all(item.products.map(async (product) => {
-          if (product.imageUrl && product.imageUrl.includes('cloud://')) {
+          if (product.imageUrl && product.imageUrl.startsWith('cloud://')) {
             try {
               const { fileList } = await wx.cloud.getTempFileURL({
                 fileList: [product.imageUrl]
               })
-              if (fileList && fileList[0] && fileList[0].tempFileURL) {
-              product.imageUrl = fileList[0].tempFileURL
-              } else {
-                product.imageUrl = this.data.defaultProductUrl
-              }
+              product.imageUrl = fileList[0]?.tempFileURL || this.data.defaultProductUrl
             } catch (error) {
               console.error('获取商品图片临时链接失败：', error)
               product.imageUrl = this.data.defaultProductUrl
@@ -189,7 +180,6 @@ Page({
           return product
         }))
       }
-
       return item
     }))
   },
@@ -201,26 +191,46 @@ Page({
     try {
       const db = wx.cloud.database()
       const toys = db.collection('toys')
-      
+      const users = db.collection('users')
       // 获取总数（只统计有商品的购物车）
       const countResult = await toys.where({
         type: 'cart',
-        'products.0': db.command.exists(true) // 确保products数组不为空
+        'products.0': db.command.exists(true)
       }).count()
-
       // 获取购物车列表（只获取有商品的购物车）
       const { data } = await toys.where({
         type: 'cart',
-        'products.0': db.command.exists(true) // 确保products数组不为空
+        'products.0': db.command.exists(true)
       })
       .skip((this.data.currentPage - 1) * this.data.pageSize)
       .limit(this.data.pageSize)
       .orderBy('updateTime', 'desc')
       .get()
-
+      // 批量查找用户信息
+      const openids = data.map(item => item.openid).filter(Boolean)
+      let userMap = {}
+      if (openids.length) {
+        const userRes = await users.where({
+          _openid: db.command.in(openids)
+        }).get()
+        userRes.data.forEach(user => {
+          userMap[user._openid] = user
+        })
+      }
+      // 合并用户信息
+      data.forEach(item => {
+        const user = userMap[item.openid]
+        item.userInfo = item.userInfo || {}
+        if (user) {
+          item.userInfo.nickName = user.nickName || '未知用户'
+          item.userInfo.avatarUrl = user.avatarUrl || this.data.defaultAvatarUrl
+        } else {
+          item.userInfo.nickName = '未知用户'
+          item.userInfo.avatarUrl = this.data.defaultAvatarUrl
+        }
+      })
       // 处理图片URL
       const processedData = await this.processImageUrls(data)
-
       // 更新数据
       this.setData({
         cartList: this.data.currentPage === 1 ? processedData : [...this.data.cartList, ...processedData],

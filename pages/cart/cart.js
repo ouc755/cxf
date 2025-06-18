@@ -50,53 +50,24 @@ Page({
   // 检查登录状态
   async checkLoginStatus() {
     this.setData({ isLoading: true })
-    
     try {
-      // 检查是否有openid
-      const openid = wx.getStorageSync('openid')
-      
-      if (!openid) {
-        console.log('用户未登录')
+      const token = wx.getStorageSync('token')
+      console.log('cart.js 读取到的token:', token)
+      if (!token) {
         this.handleNotLoggedIn()
         return
       }
-
-      // 获取最新的用户信息
-      try {
-        const db = wx.cloud.database()
-        const userResult = await db.collection('users').where({
-          _openid: openid
-        }).get()
-        
-        if (userResult.data.length > 0) {
-          const latestUserInfo = userResult.data[0]
-          // 更新本地存储的用户信息
-          wx.setStorageSync('userInfo', {
-            nickName: latestUserInfo.nickName,
-            avatarUrl: latestUserInfo.avatarUrl,
-            gender: latestUserInfo.gender,
-            country: latestUserInfo.country,
-            province: latestUserInfo.province,
-            city: latestUserInfo.city,
-            language: latestUserInfo.language
-          })
-        }
-      } catch (error) {
-        console.error('获取最新用户信息失败:', error)
-      }
-
-      // 检查是否有用户信息
-      const userInfo = wx.getStorageSync('userInfo')
-      if (!userInfo) {
-        console.log('用户信息不存在')
+      // 验证token有效性
+      const { result } = await wx.cloud.callFunction({
+        name: 'checkToken',
+        data: { token }
+      })
+      if (!result || !result.success) {
         this.handleNotLoggedIn()
         return
       }
-
-      // 已登录，加载购物车数据
       await this.loadCartData()
     } catch (error) {
-      console.error('检查登录状态出错:', error)
       this.handleNotLoggedIn()
     }
   },
@@ -107,18 +78,26 @@ Page({
       isLoading: false,
       cartItems: []
     })
+    
+    // 更新全局登录状态
+    app.globalData.isLoggedIn = false
+    app.globalData.userInfo = null
+    
+    // 清除本地存储的登录信息
+    wx.removeStorageSync('token')
+    wx.removeStorageSync('userInfo')
+    
     wx.showToast({
       title: '请先登录',
       icon: 'none',
       duration: 1500
     })
+    
     setTimeout(() => {
-      // 先跳转到个人中心页面（因为购物车是tabBar页面，不能直接跳转到非tabBar页面）
       wx.switchTab({
         url: '/pages/profile/profile',
         success: () => {
-          // 在个人中心页面中处理登录跳转
-          getApp().globalData.needLogin = true
+          app.globalData.needLogin = true
         }
       })
     }, 1500)
@@ -127,7 +106,7 @@ Page({
   // 加载购物车数据
   async loadCartData() {
     try {
-      const token = wx.getStorageSync('token') // token可选
+      const token = wx.getStorageSync('token')
       const { result } = await wx.cloud.callFunction({
         name: 'getCart',
         data: { token }
@@ -136,19 +115,6 @@ Page({
       console.log('获取购物车数据结果：', result)
 
       if (result.success) {
-        // 更新用户信息
-        if (result.userInfo) {
-          wx.setStorageSync('userInfo', {
-            nickName: result.userInfo.nickName,
-            avatarUrl: result.userInfo.avatarUrl,
-            gender: result.userInfo.gender,
-            country: result.userInfo.country,
-            province: result.userInfo.province,
-            city: result.userInfo.city,
-            language: result.userInfo.language
-          })
-        }
-
         const cartData = result.cart || { products: [] }
         const formattedProducts = cartData.products.map(product => ({
           _id: product._id || product.productId,
@@ -157,7 +123,6 @@ Page({
           quantity: product.quantity || 1,
           selected: product.selected || false,
           imageUrl: product.imageUrl,
-          // 其他可能的商品属性
           specification: product.specification,
           size: product.size,
           color: product.color
@@ -171,7 +136,7 @@ Page({
         this.calculateTotal()
         this.checkSelectAll()
       } else {
-        throw new Error(result.error)
+        throw new Error(result.error || '获取购物车数据失败')
       }
     } catch (error) {
       console.error('加载购物车数据失败:', error)
@@ -327,13 +292,18 @@ Page({
 
   // 操作前检查登录状态
   checkLoginBeforeOperation() {
-    const openid = wx.getStorageSync('openid')
-    const userInfo = wx.getStorageSync('userInfo')
-    
-    if (!openid || !userInfo) {
+    // 使用与checkLoginStatus相同的逻辑
+    if (!app.globalData.isLoggedIn) {
       this.handleNotLoggedIn()
       return false
     }
+    
+    const token = wx.getStorageSync('token')
+    if (!token) {
+      this.handleNotLoggedIn()
+      return false
+    }
+    
     return true
   }
 }) 

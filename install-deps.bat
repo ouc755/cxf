@@ -59,4 +59,4 @@ npm install
 cd ..
 
 echo All dependencies installed!
-pause 
+pause   

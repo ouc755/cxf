@@ -1,30 +1,33 @@
+<!--pages/login/login.wxml-->
 <view class="login-container">
-  <view class="login-header">
-    <image class="logo" src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/default/default-avatar.png" mode="aspectFit"></image>
-    <text class="title">欢迎来到玩具商城</text>
-    <text class="subtitle">一键登录，体验更多功能</text>
-  </view>
-  
-  <view class="login-content">
-    <button 
-      class="login-btn" 
-      type="primary" 
-      bindtap="getUserProfile"
-      loading="{{isLoggingIn}}"
-      hover-class="none"
-    >
-      微信一键登录
-    </button>
-    
-    <view class="tips">
-      <text>登录即表示同意</text>
-      <text style="color: #07c160; display: inline">《用户服务协议》</text>
-      <text>和</text>
-      <text style="color: #07c160; display: inline">《隐私政策》</text>
+  <image class="app-logo" src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/images/logo.png" mode="aspectFit"></image>
+  <text class="app-name">玩具商城</text>
+
+  <view class="login-form">
+    <image class="avatar" src="{{avatarUrl || defaultAvatarUrl}}" mode="aspectFill"></image>
+    <view class="user-details">
+      <button 
+        class="avatar-btn" 
+        open-type="chooseAvatar"
+        bindchooseavatar="onChooseAvatar"
+      >
+        选择头像
+      </button>
+      <input
+        class="nickname-input"
+        type="nickname"
+        placeholder="请输入昵称"
+        bindblur="onNicknameBlur"
+        value="{{nickname}}"
+      />
+      <button
+        class="login-btn"
+        bindtap="handleLogin"
+        loading="{{isLoggingIn}}"
+        disabled="{{!avatarUrl || !nickname}}"
+      >
+        登录
+      </button>
     </view>
   </view>
-
-  <view class="version">
-    <text>版本 0.0.3</text>
-  </view>
-</view> 
+</view>

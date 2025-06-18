@@ -33,24 +33,6 @@ function validateLoginParams(username, password) {
   }
 }
 
-// 检查登录尝试次数
-async function checkLoginAttempts(username) {
-  const now = new Date()
-  const lockTime = new Date(now.getTime() - CONFIG.LOCK_TIME)
-
-  // 获取最近的登录尝试记录
-  const attempts = await loginAttemptsCollection
-    .where({
-      username: username,
-      createTime: db.command.gt(lockTime)
-    })
-    .count()
-
-  if (attempts.total >= CONFIG.MAX_LOGIN_ATTEMPTS) {
-    throw new Error('登录尝试次数过多，请30分钟后再试')
-  }
-}
-
 // 记录登录尝试
 async function recordLoginAttempt(username, success) {
   await loginAttemptsCollection.add({
@@ -122,7 +104,7 @@ exports.main = async (event, context) => {
     validateLoginParams(username, password)
 
     // 检查登录尝试次数
-    await checkLoginAttempts(username)
+    // await checkLoginAttempts(username)
 
     // 验证管理员凭据
     const admin = await verifyAdminCredentials(username, password)

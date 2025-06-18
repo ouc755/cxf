@@ -3,6 +3,8 @@ Page({
     isEdit: false,
     productId: '',
     imageUrl: '',
+    avatarUrl: '',
+    nickname: '',
     product: {
       name: '',
       description: ''
@@ -47,6 +49,8 @@ Page({
           description: data.description || ''
         },
         imageUrl: data.imageUrl || '',
+        avatarUrl: data.avatarUrl || '',
+        nickname: data.nickname || '',
         colors: data.colors && data.colors.length ? data.colors : [''],
         variants: data.variants && data.variants.length ? data.variants : [{
           specification: '',
@@ -366,6 +370,8 @@ Page({
         name: formData.name.trim(),
         description: formData.description.trim(),
         imageUrl: this.data.imageUrl,
+        avatarUrl: this.data.avatarUrl,
+        nickname: this.data.nickname,
         colors: this.data.colors.filter(color => color.trim()),
         specifications,
         sizes,
@@ -416,5 +422,20 @@ Page({
     } finally {
       wx.hideLoading();
     }
-  }
+  },
+
+  // Add avatar selection handler
+  onChooseAvatar(e) {
+    const { avatarUrl } = e.detail
+    this.setData({
+      avatarUrl
+    })
+  },
+
+  // Add nickname input handler
+  onNicknameInput(e) {
+    this.setData({
+      nickname: e.detail.value
+    })
+  },
 }) 

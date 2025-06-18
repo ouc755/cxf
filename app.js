@@ -3,35 +3,81 @@ const { ensureLogin } = require('./utils/auth')
 
 App({
   onLaunch: async function () {
-    // 初始化云开发
-    if (!wx.cloud) {
-      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
-    } else {
-      wx.cloud.init({
-        env: 'cloud1-2g5ar9yr97b49f2f',
-        traceUser: true
+    try {
+      // 初始化云开发
+      if (!wx.cloud) {
+        console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+        return
+      }
+
+      try {
+        await wx.cloud.init({
+          env: 'cloud1-2g5ar9yr97b49f2f',
+          traceUser: true
+        })
+        console.log('云开发初始化成功')
+      } catch (cloudError) {
+        console.error('云开发初始化失败:', cloudError)
+        wx.showToast({
+          title: '云服务初始化失败',
+          icon: 'none',
+          duration: 2000
+        })
+        return // 如果云开发初始化失败，直接返回
+      }
+
+      // 获取系统信息
+      try {
+        const systemInfo = wx.getSystemInfoSync()
+        this.globalData.systemInfo = systemInfo
+      } catch (systemError) {
+        console.error('获取系统信息失败:', systemError)
+      }
+
+      // 展示本地存储能力
+      try {
+        const logs = wx.getStorageSync('logs') || []
+        logs.unshift(Date.now())
+        wx.setStorageSync('logs', logs)
+      } catch (storageError) {
+        console.error('存储操作失败:', storageError)
+      }
+
+      // 检查登录状态并决定是否跳转到登录页
+      console.log('开始检查登录状态...')
+      const isLoggedIn = await this.checkLoginStatus()
+      console.log('登录状态检查结果:', isLoggedIn)
+      
+      if (!isLoggedIn) {
+        console.log('用户未登录或登录失效，跳转到登录页')
+        wx.reLaunch({
+          url: '/pages/login/login'
+        })
+        return // 确保在跳转后不再执行后续代码
+      } else {
+        console.log('用户已登录，继续初始化其他数据')
+      }
+
+      // 初始化商品数据
+      await this.initProductsData()
+
+      // 检查管理员登录状态
+      try {
+        const adminUsername = wx.getStorageSync('adminUsername')
+        if (adminUsername) {
+          this.globalData.isAdminLoggedIn = true
+          this.globalData.adminUsername = adminUsername
+        }
+      } catch (adminError) {
+        console.error('获取管理员状态失败:', adminError)
+      }
+    } catch (error) {
+      console.error('应用启动失败:', error)
+      wx.showToast({
+        title: '应用启动失败',
+        icon: 'none',
+        duration: 2000
       })
-      // 检查登录状态
-      await this.checkLoginStatus()
-    }
-
-    // 获取系统信息
-    const systemInfo = wx.getSystemInfoSync()
-    this.globalData.systemInfo = systemInfo
-
-    // 展示本地存储能力
-    const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 初始化商品数据
-    await this.initProductsData()
-
-    // 检查管理员登录状态
-    const adminUsername = wx.getStorageSync('adminUsername')
-    if (adminUsername) {
-      this.globalData.isAdminLoggedIn = true
-      this.globalData.adminUsername = adminUsername
     }
   },
 

@@ -1,134 +1,172 @@
-const app = getApp()
-
+// pages/login/login.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    isLoggingIn: false
+    defaultAvatarUrl: 'cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/default/default-avatar.png',
+    isLoggingIn: false,
+    avatarUrl: '',
+    nickname: ''
   },
 
-  onLoad() {
-    // 页面加载时检查是否已登录
-    const userInfo = wx.getStorageSync('userInfo')
-    const openid = wx.getStorageSync('openid')
-    if (userInfo && openid) {
-      // 已登录，跳转到主页
-      wx.switchTab({
-        url: '/pages/index/index'
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    // 登录页面不需要在onLoad时检查登录状态
+    // 登录状态的检查由app.js统一管理
+    console.log('登录页面加载')
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload() {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh() {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom() {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage() {
+
+  },
+
+  // 处理头像选择
+  async onChooseAvatar(e) {
+    const { avatarUrl } = e.detail
+    try {
+      // 将临时文件上传到云存储
+      const cloudPath = `avatars/${Date.now()}-${Math.random().toString(36).substr(2)}.jpg`
+      const uploadResult = await wx.cloud.uploadFile({
+        cloudPath,
+        filePath: avatarUrl
+      })
+
+      if (!uploadResult.fileID) {
+        throw new Error('上传头像失败')
+      }
+
+      // 更新页面显示
+      this.setData({
+        avatarUrl: uploadResult.fileID
+      })
+    } catch (error) {
+      console.error('处理头像失败:', error)
+      wx.showToast({
+        title: '头像上传失败',
+        icon: 'none'
       })
     }
   },
 
-  // 获取用户信息并登录
-  getUserProfile() {
-    if (this.data.isLoggingIn) return
-
-    this.setData({ isLoggingIn: true })
-
-    wx.getUserProfile({
-      desc: '用于完善会员资料',
-      success: (res) => {
-        console.log('获取用户信息成功：', res)
-        const userInfo = res.userInfo
-        
-        // 执行登录
-        wx.login({
-          success: (loginRes) => {
-            if (loginRes.code) {
-              // 调用云函数登录
-              wx.cloud.callFunction({
-                name: 'login',
-                data: {
-                  code: loginRes.code,
-                  userInfo: userInfo  // 传递完整的用户信息
-                },
-                success: (result) => {
-                  console.log('云函数登录成功：', result)
-                  
-                  if (result.result && result.result.openid) {
-                    const { openid, token, userId } = result.result
-                    // 保存用户信息
-                    wx.setStorageSync('userInfo', userInfo)
-                    wx.setStorageSync('openid', openid)
-                    wx.setStorageSync('token', token)
-                    wx.setStorageSync('userId', userId)
-
-                    wx.showToast({
-                      title: '登录成功',
-                      icon: 'success',
-                      duration: 1500
-                    })
-
-                    // 延迟跳转到主页面
-                    setTimeout(() => {
-                      wx.switchTab({
-                        url: '/pages/index/index'
-                      })
-                    }, 1500)
-                  }
-                },
-                fail: (err) => {
-                  console.error('云函数登录失败：', err)
-                  wx.showToast({
-                    title: '登录失败',
-                    icon: 'none'
-                  })
-                }
-              })
-            }
-          },
-          fail: (err) => {
-            console.error('wx.login 调用失败：', err)
-            wx.showToast({
-              title: '登录失败，请重试',
-              icon: 'none'
-            })
-          }
-        })
-      },
-      fail: (err) => {
-        console.error('获取用户信息失败：', err)
-        wx.showToast({
-          title: '需要您的授权才能继续',
-          icon: 'none'
-        })
-      },
-      complete: () => {
-        this.setData({ isLoggingIn: false })
-      }
+  // 处理昵称输入
+  onNicknameBlur(e) {
+    this.setData({
+      nickname: e.detail.value
     })
   },
 
-  // 获取手机号
-  async getPhoneNumber(e) {
-    if (e.detail.errMsg !== "getPhoneNumber:ok") {
-      wx.showToast({
-        title: '获取手机号失败',
-        icon: 'none'
-      })
+  // 获取用户信息并登录
+  async handleLogin() {
+    if (this.data.isLoggingIn) return
+    
+    // 新增：登录前校验
+    if (!this.data.nickname || !this.data.avatarUrl) {
+      wx.showToast({ title: '请填写昵称并选择头像', icon: 'none' })
       return
     }
 
+    this.setData({ isLoggingIn: true })
+    
     try {
-      const result = await app.updateUserInfo({
-        phoneNumber: e.detail.code // 使用手机号获取凭证
+      // 1. 调用微信登录
+      console.log('Login: 开始调用wx.login()...')
+      const { code } = await wx.login()
+      console.log('Login: wx.login() 返回 code:', code)
+      
+      // 2. 调用云函数登录
+      console.log('Login: 开始调用云函数 login...')
+      const loginResult = await wx.cloud.callFunction({
+        name: 'login',
+        data: { 
+          code,
+          userInfo: {
+            nickName: this.data.nickname,
+            avatarUrl: this.data.avatarUrl
+          }
+        }
       })
 
-      if (result) {
-        wx.showToast({
-          title: '手机号更新成功',
-          icon: 'success'
-        })
-      } else {
-        wx.showToast({
-          title: '手机号更新失败',
-          icon: 'none'
-        })
+      console.log('Login: 云函数 login 返回结果:', loginResult)
+
+      if (!loginResult.result.success) {
+        throw new Error('登录失败')
       }
-    } catch (error) {
-      console.error('Update phone number failed:', error)
+
+      // 3. 保存token和userInfo到本地
+      wx.setStorageSync('token', loginResult.result.data.token)
+      wx.setStorageSync('openid', loginResult.result.data.openid)
+      wx.setStorageSync('userInfo', loginResult.result.data.userInfo)
+      console.log('login.js 登录成功后本地token:', wx.getStorageSync('token'))
+      // 4. 更新全局登录状态
+      getApp().globalData.isLoggedIn = true
+      getApp().globalData.userInfo = loginResult.result.data.userInfo
+      getApp().globalData.openid = loginResult.result.data.openid
+      console.log('Login: 全局globalData更新完成。isLoggedIn:', getApp().globalData.isLoggedIn, 'userInfo:', getApp().globalData.userInfo, 'openid:', getApp().globalData.openid)
+      // 5. 跳转到个人中心页面
+      wx.reLaunch({
+        url: '/pages/profile/profile'
+      })
       wx.showToast({
-        title: '手机号更新失败',
+        title: '登录成功',
+        icon: 'success'
+      })
+
+    } catch (error) {
+      console.error('登录失败:', error)
+      wx.showToast({
+        title: error.message || '登录失败',
         icon: 'none'
       })
+      this.setData({ isLoggingIn: false })
     }
   }
-}) 
+})

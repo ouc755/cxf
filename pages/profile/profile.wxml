@@ -4,14 +4,13 @@
     <block wx:if="{{isLoggedIn}}">
       <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
       <view class="user-details">
-        <text class="nickname clickable" bindtap="handleEditNickname">{{userInfo.nickName}}</text>
+        <text class="nickname" bindtap="handleEditNickname">{{userInfo.nickName}}</text>
       </view>
     </block>
     <block wx:else>
+      <!-- 未登录状态下，提示用户登录 -->
       <image class="avatar" src="{{defaultAvatarUrl}}" mode="aspectFill"></image>
-      <view class="user-details">
-        <text class="login-tip" bindtap="navigateToLogin">点击登录</text>
-      </view>
+      <text class="login-tip" bindtap="navigateToLogin">请登录</text>
     </block>
   </view>
 
@@ -81,4 +80,4 @@
   <view class="version-info">
     <text>版本 0.0.3</text>
   </view>
-</view> 
+</view>

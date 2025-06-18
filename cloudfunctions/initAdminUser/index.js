@@ -1,5 +1,7 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
+const crypto = require('crypto')
+const PASSWORD_SALT = 'your-salt-here' // 保持和adminLogin里一致
 
 cloud.init({
   env: 'cloud1-2g5ar9yr97b49f2f'
@@ -12,7 +14,11 @@ exports.main = async (event, context) => {
   try {
     console.log('开始初始化管理员账号...')
 
-    // 1. 检查 adminUsers 集合中是否已有管理员账号
+    // 1. 尝试直接创建集合（已存在会报错，忽略即可）
+    try { await db.createCollection('adminUsers') } catch (e) {}
+    try { await db.createCollection('loginAttempts') } catch (e) {}
+
+    // 2. 检查 adminUsers 集合中是否已有管理员账号
     try {
       const { data } = await db.collection('adminUsers')
         .where({
@@ -34,12 +40,16 @@ exports.main = async (event, context) => {
       throw err
     }
 
-    // 2. 创建新的管理员账号
+    // 3. 创建新的管理员账号
     try {
+      const hashedPassword = crypto
+        .createHash('sha256')
+        .update('admin123' + PASSWORD_SALT)
+        .digest('hex')
       const result = await db.collection('adminUsers').add({
         data: {
           username: 'admin',
-          password: 'admin123',
+          password: hashedPassword,
           role: 'admin',
           createTime: db.serverDate(),
           updateTime: db.serverDate()
@@ -53,7 +63,7 @@ exports.main = async (event, context) => {
         msg: '初始化管理员账号成功',
         data: {
           username: 'admin',
-          password: 'admin123'
+          password: hashedPassword
         }
       }
     } catch (err) {

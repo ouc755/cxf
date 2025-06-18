@@ -20,9 +20,20 @@ Page({
 
   // 导航到管理员登录
   navigateToAdminLogin() {
+    console.log('点击了管理员登录按钮');
     wx.navigateTo({
-      url: '/pages/admin/login/login'
-    })
+      url: '/pages/adminLogin/adminLogin',
+      success: function() {
+        console.log('跳转成功');
+      },
+      fail: function(error) {
+        console.error('跳转失败:', error);
+        wx.showToast({
+          title: '跳转失败',
+          icon: 'none'
+        });
+      }
+    });
   },
 
   // 显示功能未开放提示

@@ -1,2 +1,41 @@
 <!--pages/admin/order/detail.wxml-->
-<text>pages/admin/order/detail.wxml</text>
+<view class="order-detail-container">
+  <!-- 用户信息 -->
+  <view class="user-info" wx:if="{{userInfo}}">
+    <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+    <view class="user-meta">
+      <text class="nickname">{{userInfo.nickName || '未知用户'}}</text>
+      <text class="userid">ID: {{userInfo._openid}}</text>
+    </view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="cart-products">
+    <block wx:for="{{products}}" wx:key="_id">
+      <view class="product-item">
+        <image class="product-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        <view class="product-info">
+          <text class="product-name">{{item.name}}</text>
+          <view class="spec-row">
+            <text wx:if="{{item.specification}}">规格: {{item.specification}}</text>
+            <text wx:if="{{item.size}}">尺寸: {{item.size}}</text>
+            <text wx:if="{{item.color}}">颜色: {{item.color}}</text>
+            <text wx:if="{{item.style}}">款式: {{item.style}}</text>
+            <text wx:if="{{item.giftBag}}">礼包: {{item.giftBag}}</text>
+            <text wx:if="{{item.packaging}}">包装: {{item.packaging}}</text>
+          </view>
+          <view class="custom-row" wx:if="{{item.customOptionsArr.length}}">
+            <text>定制: </text>
+            <block wx:for="{{item.customOptionsArr}}" wx:key="key">
+              <text class="custom-key">{{item.key}}:{{item.value}}</text>
+            </block>
+          </view>
+          <view class="price-qty-row">
+            <text class="product-quantity">数量: {{item.quantity}}</text>
+            <text class="product-price">单价: ¥{{item.price}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

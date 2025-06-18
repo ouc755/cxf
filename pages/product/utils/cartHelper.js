@@ -7,18 +7,27 @@ const addToCart = async function(productData, quantity) {
     type: 'cart'
   }).get();
 
+  // 判断商品是否完全相同（所有规格、颜色、定制项等都一致才合并数量）
+  const isSameProduct = (p1, p2) => {
+    return (
+      p1._id === p2._id &&
+      p1.specification === p2.specification &&
+      p1.size === p2.size &&
+      p1.color === p2.color &&
+      p1.style === p2.style &&
+      p1.giftBag === p2.giftBag &&
+      p1.packaging === p2.packaging &&
+      JSON.stringify(p1.customOptions || {}) === JSON.stringify(p2.customOptions || {})
+    );
+  };
+
   if (cartData && cartData.length > 0) {
     // 更新现有购物车
     const cart = cartData[0];
     const products = cart.products || [];
     
     // 检查是否已存在相同商品
-    const existingProductIndex = products.findIndex(p => 
-      p._id === productData._id && 
-      p.specification === productData.specification && 
-      p.size === productData.size &&
-      p.color === productData.color
-    );
+    const existingProductIndex = products.findIndex(p => isSameProduct(p, productData));
 
     if (existingProductIndex > -1) {
       products[existingProductIndex].quantity += quantity;

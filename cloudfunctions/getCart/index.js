@@ -100,8 +100,8 @@ exports.main = async (event, context) => {
           try {
             const productDetail = await productsCollection.doc(product.productId).get()
             return {
-              ...product,
-              ...productDetail.data
+              ...productDetail.data,
+              ...product // 保证购物车中的 quantity、selected 等字段优先
             }
           } catch (error) {
             console.error('获取商品详情失败:', error)
