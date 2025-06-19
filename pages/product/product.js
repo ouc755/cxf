@@ -188,6 +188,15 @@ Page({
   },
 
   async addToCart() {
+    // 新增：添加到购物车前校验登录
+    const token = wx.getStorageSync('token')
+    if (!token) {
+      wx.showToast({ title: '请先登录', icon: 'none' })
+      setTimeout(() => {
+        wx.navigateTo({ url: '/pages/login/login' })
+      }, 800)
+      return
+    }
     const { 
       product, 
       selectedStyle, 

@@ -472,37 +472,4 @@
 .cancel-btn:active {
   background: #ff4d4f;
   color: #fff;
-}
-
-/* 头像选择样式 */
-.avatar-wrapper {
-  width: 100%;
-  height: 200rpx;
-  background: #f7f8fa;
-  border-radius: 16rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 2rpx dashed #ddd;
-  transition: all 0.3s ease;
-  padding: 0;
-  margin: 0;
-  line-height: 1;
-}
-
-.avatar-wrapper::after {
-  border: none;
-}
-
-.avatar-wrapper:active {
-  border-color: #07c160;
-  background: #f0fff4;
-}
-
-.avatar {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12rpx;
 } 

@@ -292,18 +292,14 @@ Page({
 
   // 操作前检查登录状态
   checkLoginBeforeOperation() {
-    // 使用与checkLoginStatus相同的逻辑
-    if (!app.globalData.isLoggedIn) {
-      this.handleNotLoggedIn()
-      return false
-    }
-    
     const token = wx.getStorageSync('token')
     if (!token) {
-      this.handleNotLoggedIn()
+      wx.showToast({ title: '请先登录', icon: 'none' })
+      setTimeout(() => {
+        wx.navigateTo({ url: '/pages/login/login' })
+      }, 800)
       return false
     }
-    
     return true
   }
 }) 

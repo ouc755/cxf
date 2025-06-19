@@ -44,19 +44,18 @@ App({
       }
 
       // 检查登录状态并决定是否跳转到登录页
-      console.log('开始检查登录状态...')
-      const isLoggedIn = await this.checkLoginStatus()
-      console.log('登录状态检查结果:', isLoggedIn)
-      
-      if (!isLoggedIn) {
-        console.log('用户未登录或登录失效，跳转到登录页')
-        wx.reLaunch({
-          url: '/pages/login/login'
-        })
-        return // 确保在跳转后不再执行后续代码
-      } else {
-        console.log('用户已登录，继续初始化其他数据')
-      }
+      // console.log('开始检查登录状态...')
+      // const isLoggedIn = await this.checkLoginStatus()
+      // console.log('登录状态检查结果:', isLoggedIn)
+      // if (!isLoggedIn) {
+      //   console.log('用户未登录或登录失效，跳转到登录页')
+      //   wx.reLaunch({
+      //     url: '/pages/login/login'
+      //   })
+      //   return // 确保在跳转后不再执行后续代码
+      // } else {
+      //   console.log('用户已登录，继续初始化其他数据')
+      // }
 
       // 初始化商品数据
       await this.initProductsData()

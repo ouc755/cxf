@@ -12,24 +12,6 @@
       </view>
     </view>
 
-    <!-- 头像选择 -->
-    <view class="form-group">
-      <view class="label">头像</view>
-      <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-        <image class="avatar" src="{{avatarUrl}}" mode="aspectFill"></image>
-        <view wx:if="{{!avatarUrl}}" class="upload-placeholder">
-          <text class="iconfont icon-camera"></text>
-          <text>点击选择头像</text>
-        </view>
-      </button>
-    </view>
-
-    <!-- 昵称输入 -->
-    <view class="form-group">
-      <view class="label">昵称</view>
-      <input type="nickname" class="input" placeholder="请输入昵称" value="{{nickname}}" bindinput="onNicknameInput"/>
-    </view>
-
     <!-- 商品名称 -->
     <view class="form-group">
       <view class="label">商品名称</view>

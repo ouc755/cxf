@@ -11,17 +11,6 @@
       </view>
     </view>
 
-    <!-- 初始化管理员账号 -->
-    <view class="settings-item" bindtap="initAdminUser">
-      <view class="item-left">
-        <mp-icon icon="add" color="#333333" size="{{24}}"></mp-icon>
-        <text>初始化管理员账号</text>
-      </view>
-      <view class="item-right">
-        <mp-icon icon="arrow" color="#CCCCCC" size="{{12}}"></mp-icon>
-      </view>
-    </view>
-
     <!-- 其他设置项 -->
     <view class="settings-item">
       <view class="item-left">
