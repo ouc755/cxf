@@ -33,13 +33,17 @@
           <text>{{product.styles.join('、')}}</text>
         </view>
         <view class="spec-item" wx:if="{{product.sizes && product.sizes.length > 0}}">
-          <text class="spec-label">尺寸：</text>
+          <text class="spec-label">AR：</text>
           <text>{{product.sizes.join('、')}}</text>
         </view>
         <!-- 自定义属性 -->
         <view class="spec-item" wx:for="{{product.customProperties}}" wx:key="name" wx:if="{{item.options && item.options.length > 0}}">
           <text class="spec-label">{{item.name}}：</text>
           <text>{{item.options.join('、')}}</text>
+        </view>
+        <view wx:for="{{product.specs}}" wx:key="index" class="spec-item">
+          <text class="spec-label">{{item.label === '尺寸' ? 'AR' : item.label}}</text>
+          <text class="spec-value">{{item.value}}</text>
         </view>
       </view>
 

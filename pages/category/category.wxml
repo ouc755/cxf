@@ -19,7 +19,7 @@
           </view>
         </view>
         <view class="product-btn" catchtap="onBuyNow" data-id="{{item._id}}">
-          <button class="buy-btn">立即购买</button>
+          <button class="buy-btn">查看详情</button>
         </view>
       </view>
     </block>

@@ -17,8 +17,8 @@ Page({
     }
 
     // 获取商品ID
-    const { id } = options
-    if (!id) {
+    const { productId } = options
+    if (!productId) {
       wx.showToast({
         title: '商品不存在',
         icon: 'error'
@@ -30,7 +30,7 @@ Page({
     }
 
     // 加载商品详情
-    await this.loadProductDetail(id)
+    await this.loadProductDetail(productId)
   },
 
   // 加载商品详情

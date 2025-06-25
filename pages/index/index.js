@@ -277,13 +277,33 @@ Page({
 
     const db = wx.cloud.database();
     
-    // 根据分类ID查询商品
-    db.collection('products')
-      .where({
-        categoryId: categoryId
+    // 定义分类关键词映射，用于更精确的匹配
+    const categoryKeywords = {
+      1: ['益智', '智力', '思维', '逻辑'], // 益智玩具
+      2: ['积木', '拼装', '搭建', '组装'], // 积木拼装
+      3: ['科教', '科学', '教育', '学习'], // 科教玩具
+      4: ['毛绒', '布偶', '娃娃', '公仔'], // 毛绒玩具
+      5: ['智能', '电子', '遥控', '编程'], // 智能玩具
+      6: ['运动', '户外', '健身', '球类'], // 运动玩具
+      7: ['手工', 'DIY', '制作', '创意']  // 手工玩具
+    };
+    
+    const keywords = categoryKeywords[categoryId] || [categoryName];
+    
+    // 构建多个关键词的查询条件
+    const searchConditions = keywords.map(keyword => ({
+      name: db.RegExp({
+        regexp: keyword,
+        options: 'i'
       })
+    }));
+    
+    // 使用 OR 条件查询
+    db.collection('products')
+      .where(db.command.or(searchConditions))
       .get()
       .then(res => {
+        console.log(`分类 ${categoryName} 查询结果:`, res.data);
         const products = res.data.map(product => {
           let displayPrice = 'N/A';
           if (product.prices && Array.isArray(product.prices) && product.prices.length > 0) {
@@ -327,9 +347,8 @@ Page({
   // 点击立即购买
   onBuyNow: function(e) {
     const productId = e.currentTarget.dataset.id
-    console.log('点击立即购买，ID：', productId)
     wx.navigateTo({
-      url: `/pages/order/create?productId=${productId}`
+      url: `/pages/product/product?id=${productId}`
     })
   },
 

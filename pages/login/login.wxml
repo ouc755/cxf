@@ -1,10 +1,10 @@
 <!--pages/login/login.wxml-->
 <view class="login-container">
-  <image class="app-logo" src="cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/images/logo.png" mode="aspectFit"></image>
-  <text class="app-name">玩具商城</text>
+  <!-- <image class="app-logo" src="{{logoUrl}}" mode="aspectFit" binderror="onImageError" data-type="logo"></image> -->
+  <text class="app-name">磁悬浮科技</text>
 
   <view class="login-form">
-    <image class="avatar" src="{{avatarUrl || defaultAvatarUrl}}" mode="aspectFill"></image>
+    <image class="avatar" src="{{avatarUrl || defaultAvatarUrl}}" mode="aspectFill" binderror="onImageError" data-type="avatar"></image>
     <view class="user-details">
       <button 
         class="avatar-btn" 

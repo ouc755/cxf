@@ -22,7 +22,7 @@
         </view>
 
         <view class="spec-group spec-group-half">
-          <text class="sub-title">尺寸</text>
+          <text class="sub-title">AR</text>
           <view class="option-list">
             <button wx:for="{{toy.sizes}}" wx:key="index" 
               class="spec-option {{selectedSize === index ? 'active' : ''}}"

@@ -6,6 +6,7 @@ Page({
    */
   data: {
     defaultAvatarUrl: 'cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/default/default-avatar.png',
+    logoUrl: 'cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/images/logo.png',
     isLoggingIn: false,
     avatarUrl: '',
     nickname: ''
@@ -18,6 +19,86 @@ Page({
     // 登录页面不需要在onLoad时检查登录状态
     // 登录状态的检查由app.js统一管理
     console.log('登录页面加载')
+    
+    // 初始化云开发
+    if (!wx.cloud) {
+      wx.redirectTo({
+        url: '../chooseLib/chooseLib',
+      })
+      return
+    }
+    
+    wx.cloud.init({
+      env: 'cloud1-2g5ar9yr97b49f2f',
+      traceUser: true
+    })
+
+    // 获取图片的临时链接
+    this.getImageUrls()
+  },
+
+  // 获取图片的临时链接
+  getImageUrls: function() {
+    const imageUrls = [
+      this.data.logoUrl,
+      this.data.defaultAvatarUrl
+    ].filter(url => url && url.startsWith('cloud://'))
+
+    if (imageUrls.length === 0) {
+      console.log('[getImageUrls] 没有需要转换的云存储图片')
+      return
+    }
+
+    wx.cloud.getTempFileURL({
+      fileList: imageUrls
+    }).then(res => {
+      console.log('[getImageUrls] 获取临时链接结果:', res)
+      
+      const updatedData = {}
+      
+      if (res.fileList && res.fileList.length > 0) {
+        res.fileList.forEach(file => {
+          if (file.fileID === this.data.logoUrl && file.tempFileURL) {
+            updatedData.logoUrl = file.tempFileURL
+            console.log('[getImageUrls] 更新 logoUrl:', file.tempFileURL)
+          }
+          if (file.fileID === this.data.defaultAvatarUrl && file.tempFileURL) {
+            updatedData.defaultAvatarUrl = file.tempFileURL
+            console.log('[getImageUrls] 更新 defaultAvatarUrl:', file.tempFileURL)
+          }
+        })
+      }
+
+      if (Object.keys(updatedData).length > 0) {
+        this.setData(updatedData)
+      }
+    }).catch(err => {
+      console.error('[getImageUrls] 获取图片临时链接失败:', err)
+    })
+  },
+
+  // 图片加载失败的处理函数
+  onImageError: function(e) {
+    console.error('图片加载失败触发 onImageError：', e)
+    const type = e.currentTarget.dataset.type // 'logo' 或 'avatar'
+    const cloudDefaultImage = 'cloud://cloud1-2g5ar9yr97b49f2f.636c-cloud1-2g5ar9yr97b49f2f-1361317451/default/default.png'
+
+    wx.cloud.getTempFileURL({
+      fileList: [cloudDefaultImage]
+    }).then(res => {
+      if (res.fileList && res.fileList[0] && res.fileList[0].tempFileURL) {
+        const tempDefaultImageUrl = res.fileList[0].tempFileURL
+        if (type === 'logo') {
+          this.setData({ logoUrl: tempDefaultImageUrl })
+        } else if (type === 'avatar') {
+          this.setData({ defaultAvatarUrl: tempDefaultImageUrl })
+        }
+      } else {
+        console.error('[onImageError] 获取云端默认图片临时链接失败:', JSON.stringify(res))
+      }
+    }).catch(err => {
+      console.error('[onImageError] 获取云端默认图片临时链接异常:', err)
+    })
   },
 
   /**

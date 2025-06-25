@@ -2,79 +2,38 @@
   min-height: 100vh;
   background-color: #f8f8f8;
   padding-bottom: 40rpx;
-  padding: 20rpx;
 }
 
 .user-info-section {
+  background-color: #ffffff;
+  padding: 40rpx 30rpx;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 40rpx 0;
-  background: #fff;
-  border-radius: 20rpx;
   margin-bottom: 20rpx;
 }
 
 .avatar {
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 50%;
-  margin-bottom: 20rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  margin-right: 30rpx;
 }
 
 .user-details {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-}
-
-.nickname {
-  font-size: 32rpx;
-  color: #333;
-  margin: 20rpx 0;
-}
-
-.avatar-btn {
-  width: 200rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  font-size: 28rpx;
-  margin: 20rpx 0;
-  background: #f8f8f8;
-  color: #333;
+  justify-content: center;
+  gap: 15rpx;
 }
 
 .nickname-input {
-  width: 80%;
-  height: 80rpx;
+  width: 60%;
+  height: 60rpx;
   border: 1rpx solid #ddd;
-  border-radius: 40rpx;
-  padding: 0 30rpx;
-  margin: 20rpx 0;
-  font-size: 28rpx;
-}
-
-.login-btn {
-  width: 80%;
-  height: 88rpx;
-  line-height: 88rpx;
-  background: #07c160;
-  color: #fff;
-  font-size: 32rpx;
-  border-radius: 44rpx;
-  margin-top: 20rpx;
-}
-
-.login-btn[disabled] {
-  background: #9be0b8;
-  color: #fff;
-}
-
-.function-section {
-  background: #fff;
-  border-radius: 20rpx;
-  padding: 20rpx;
+  border-radius: 30rpx;
+  padding: 0 20rpx;
+  margin-top: 10rpx;
 }
 
 .submit-login-btn {
@@ -91,6 +50,13 @@
 
 .user-details {
   flex: 1;
+}
+
+.nickname {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10rpx;
 }
 
 .nickname.clickable {

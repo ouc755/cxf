@@ -53,7 +53,7 @@
           </view>
         </view>
         <view class="product-btn" catchtap="onBuyNow" data-id="{{item._id}}">
-          <button class="buy-btn">立即购买</button>
+          <button class="buy-btn">查看详情</button>
         </view>
       </view>
       <!-- 无搜索结果时显示 -->
@@ -68,7 +68,7 @@
 
   <!-- 热门商品展示区 -->
   <view class="section" wx:if="{{!isSearching}}">
-    <view class="section-title">热门玩具</view>
+    <view class="section-title">热门商品</view>
     <view class="product-list">
       <view class="product-card" wx:for="{{hotProducts}}" wx:key="_id">
         <view class="product-content" bindtap="onProductTap" data-id="{{item._id}}">
@@ -81,7 +81,7 @@
           </view>
         </view>
         <view class="product-btn" catchtap="onBuyNow" data-id="{{item._id}}">
-          <button class="buy-btn">立即购买</button>
+          <button class="buy-btn">查看详情</button>
         </view>
       </view>
     </view>
